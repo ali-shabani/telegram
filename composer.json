@@ -1,0 +1,14 @@
+{
+    "name": "alish/telegram",
+    "description": "a php wrapper package for telegram bot",
+    "type": "library",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Ali Shabani",
+            "email": "pyramidalish@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
