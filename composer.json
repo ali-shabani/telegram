@@ -18,7 +18,6 @@
         }
     },
     "extra": {
-
         "laravel": {
             "providers": [
                 "Alish\\Telegram\\TelegramServiceProvider"
