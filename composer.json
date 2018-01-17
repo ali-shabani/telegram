@@ -1,6 +1,6 @@
 {
     "name": "alish/telegram",
-    "description": "a php wrapper package for telegram bot",
+    "description": "a laravel package for telegram bot",
     "type": "library",
     "license": "GPL",
     "authors": [
@@ -9,6 +9,25 @@
             "email": "pyramidalish@gmail.com"
         }
     ],
-    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Alish\\Telegram\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.3-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Alish\\Telegram\\TelegramServiceProvider"
+            ],
+            "aliases": {
+                "Telegram": "Alish\\MeliPayamak\\Facades\\TelegramFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {}
 }
