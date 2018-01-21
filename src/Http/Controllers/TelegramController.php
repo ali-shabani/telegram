@@ -32,14 +32,9 @@ class TelegramController extends BaseController
         $update = Parser::parse(Update::class, $inputs);
 
         if($this->isNewRequest($update)) {
-            try {
-                $this->handleRequest($update);
-                $this->saveRequest($update, $inputs);
-            }
-            catch (\Exception $e) {
-                report($e);
-                Log::error($e->getMessage());
-            }
+            $this->handleRequest($update);
+            $this->saveRequest($update, $inputs);
+
         }
 
         return response('', 200);
