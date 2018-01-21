@@ -15,7 +15,10 @@
     "autoload": {
         "psr-4": {
             "Alish\\Telegram\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {
