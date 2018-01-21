@@ -2,7 +2,7 @@
     "name": "alish/telegram",
     "description": "a laravel package for telegram bot",
     "type": "library",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "keywords": ["telegram", "laravel", "telegram bot"],
     "time": "2018-01-17",
     "license": "GPL",
