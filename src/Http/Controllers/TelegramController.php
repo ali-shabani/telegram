@@ -147,10 +147,11 @@ class TelegramController extends BaseController
     private function getHandlerInstance($type, $update)
     {
         $handler = $this->getHandler($type);
-
-        $instance = new $handler($update);
-        if ($instance instanceof TelegramUpdateHandler) {
-            return $instance;
+        if (class_exists($handler)) {
+            $instance = new $handler($update);
+            if ($instance instanceof TelegramUpdateHandler) {
+                return $instance;
+            }
         }
 
         return null;
