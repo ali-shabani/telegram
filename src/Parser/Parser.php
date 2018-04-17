@@ -51,6 +51,7 @@ class Parser {
     private function parseArray($type, $value)
     {
         $type = $this->docBlockParser->arrayType($type);
+        $output = [];
         foreach ($value as $item) {
             $output[] = $this->parser($type, $item);
         }
