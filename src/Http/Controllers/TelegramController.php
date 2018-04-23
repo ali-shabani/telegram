@@ -27,14 +27,18 @@ class TelegramController extends BaseController
 
     public function __invoke(Request $request)
     {
+        try {
+            $inputs = $request->all();
+            $update = Parser::parse(Update::class, $inputs);
 
-        $inputs = $request->all();
-        $update = Parser::parse(Update::class, $inputs);
+            if($this->isNewRequest($update)) {
+                $this->handleRequest($update);
+                $this->saveRequest($update, $inputs);
 
-        if($this->isNewRequest($update)) {
-            $this->handleRequest($update);
-            $this->saveRequest($update, $inputs);
-
+            }
+        }
+        catch (\Exception $error) {
+            Log::error($error);
         }
 
         return response('', 200);
