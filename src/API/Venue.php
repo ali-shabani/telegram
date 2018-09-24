@@ -28,4 +28,10 @@ class Venue extends BaseTelegram {
      */
     protected $foursquare_id;
 
+    /**
+     * @var string|null $foursquare_type
+     * Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+     */
+    protected $foursquare_type;
+
 }

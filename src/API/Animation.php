@@ -13,6 +13,24 @@ class Animation extends BaseTelegram
     protected $file_id;
 
     /**
+     * @var integer $width
+     * Video width as defined by sender
+     */
+    protected $width;
+
+    /**
+     * @var integer $height
+     * Video height as defined by sender
+     */
+    protected $height;
+
+    /**
+     * @var integer $duration
+     * Duration of the video in seconds as defined by sender
+     */
+    protected $duration;
+
+    /**
      * @var PhotoSize $thumb
      * Optional. Animation thumbnail as defined by sender
      */

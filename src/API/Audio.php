@@ -43,4 +43,9 @@ class Audio extends BaseTelegram {
      */
     protected $file_size;
 
+    /**
+     * @var PhotoSize|null
+     * Thumbnail of the album cover to which the music file belongs
+     */
+    protected $thumb;
 }

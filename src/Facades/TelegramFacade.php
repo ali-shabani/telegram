@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\Facades;
 
-use Alish\Telegram\API\User;
 use Illuminate\Support\Facades\Facade;
 
 /**

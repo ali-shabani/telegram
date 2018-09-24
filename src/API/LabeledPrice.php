@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pyramid
- * Date: 11/15/17
- * Time: 12:18 PM
- */
 
 namespace Alish\Telegram\API;
 

@@ -5,6 +5,7 @@ namespace Alish\Telegram\Http\Controllers;
 
 use Alish\Telegram\API\Update;
 use Alish\Telegram\Exception\NoTelegramHandlerFoundException;
+use Alish\Telegram\Exception\TelegramException;
 use Alish\Telegram\Facades\Telegram;
 use Alish\Telegram\Model\TelegramUpdate;
 use Alish\Telegram\Parser\DocBlockParser;
@@ -12,6 +13,7 @@ use Alish\Telegram\Parser\Parser;
 use Alish\Telegram\TelegramCommand;
 use Alish\Telegram\TelegramLoader;
 use Alish\Telegram\TelegramUpdateHandler;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
@@ -20,11 +22,19 @@ class TelegramController extends BaseController
 {
     private $docBlockParser;
 
+    /**
+     * TelegramController constructor.
+     */
     public function __construct()
     {
         $this->docBlockParser = new DocBlockParser();
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     * @throws TelegramException
+     */
     public function __invoke(Request $request)
     {
         try {
@@ -38,32 +48,73 @@ class TelegramController extends BaseController
             }
         }
         catch (\Exception $error) {
-            Log::error($error);
+            $this->handleError($error);
         }
 
-        return response('', 200);
-
+        return Response::create('', 200);
     }
 
+    /**
+     * check if this response is fresh or not
+     * @param Update $update
+     * @return bool
+     */
     private function isNewRequest(Update $update)
     {
-        $update_id = $update->getUpdateId();
-        $didFind = TelegramUpdate::where('update_id', $update_id)->first();
-        return $didFind === null;
+        return TelegramUpdate::where('update_id', $update->getUpdateId())->exists();
     }
 
+    /**
+     * save request to database for avoiding duplicate response and have a log for them
+     * @param Update $update
+     * @param $inputs
+     * @return TelegramUpdate
+     */
     private function saveRequest(Update $update, $inputs)
     {
-        TelegramUpdate::create([
+        return TelegramUpdate::create([
             'update_id' => $update->getUpdateId(),
             'result' => json_encode($inputs)
         ]);
     }
 
+    /**
+     * @param Update $update
+     * @throws NoTelegramHandlerFoundException
+     * @throws \ReflectionException
+     */
+    private function handleRequest(Update $update)
+    {
+        $type = $this->getUpdateType($update);
+        $this->setUser($update, $type['type']);
+
+        $this->runLoaders($update);
+
+        $handler = $this->getHandlerInstance($type['type'], $update);
+
+        if ($this->isCommandActive()) {
+            if ($this->handleCommand($type, $update)) {
+                return;
+            }
+        }
+
+        if ($handler) {
+            $handler->handler();
+            return;
+        }
+
+        throw new NoTelegramHandlerFoundException();
+
+    }
+
+    /**
+     * @param Update $update
+     * @return array|null
+     * @throws \ReflectionException
+     */
     private function getUpdateType(Update $update)
     {
-        $reflection = new \ReflectionClass($update);
-        $properties = $reflection->getProperties();
+        $properties = (new \ReflectionClass($update))->getProperties();
         foreach ($properties as $property) {
             if ($this->docBlockParser->isNullable($property)) {
                 $key = $property->getName();
@@ -80,39 +131,23 @@ class TelegramController extends BaseController
         return null;
     }
 
-    private function handleRequest(Update $update)
+    /**
+     * @param $update
+     * @param $type
+     */
+    private function setUser($update, $type)
     {
-        $type = $this->getUpdateType($update);
-        $this->setUser($update, $type['type']);
 
-        $this->load($update);
-
-        $handler = $this->getHandlerInstance($type['type'], $update);
-
-        if ($this->isCommandActive()) {
-            if ($type['key'] === 'Message') {
-                if ($command = $this->commandHandler($update)) {
-                    if (class_exists($command)) {
-                        $message = $update->getMessage();
-                        $class = new $command($message);
-                        if ($class instanceof TelegramCommand) {
-                            $class->handler();
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-
-        if ($handler) {
-            $handler->handler();
-        }
-        else {
-            throw new NoTelegramHandlerFoundException();
-        }
-
+        $method = 'get' . studly_case($type);
+        $result = $update->$method();
+        Telegram::setUser($result->getFrom());
     }
 
+
+    /**
+     * @param Update $update
+     * @return null
+     */
     private function commandHandler(Update $update)
     {
         $message = $update->getMessage();
@@ -138,16 +173,42 @@ class TelegramController extends BaseController
         return null;
     }
 
-    private function getHandler($type)
-    {
-        return config('telegram.handlers.' . $type, null);
-    }
-
+    /**
+     * @return mixed
+     */
     private function isCommandActive()
     {
         return config('telegram.commands.active', false);
     }
 
+    /**
+     * @param $type
+     * @param Update $update
+     * @return bool
+     */
+    private function handleCommand($type, Update $update)
+    {
+        if ($type['key'] === 'Message') {
+            if ($command = $this->commandHandler($update)) {
+                if (class_exists($command)) {
+                    $message = $update->getMessage();
+                    $class = new $command($message);
+                    if ($class instanceof TelegramCommand) {
+                        $class->handler();
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $type
+     * @param $update
+     * @return null
+     */
     private function getHandlerInstance($type, $update)
     {
         $handler = $this->getHandler($type);
@@ -162,15 +223,19 @@ class TelegramController extends BaseController
 
     }
 
-    private function setUser($update, $type)
+    /**
+     * @param $type
+     * @return mixed
+     */
+    private function getHandler($type)
     {
-
-        $method = 'get' . studly_case($type);
-        $result = $update->$method();
-        Telegram::setUser($result->getFrom());
+        return config('telegram.handlers.' . $type, null);
     }
 
-    private function load(Update $update)
+    /**
+     * @param Update $update
+     */
+    private function runLoaders(Update $update)
     {
         $loaders = config('telegram.loaders', []);
         foreach ($loaders as $loader) {
@@ -181,6 +246,21 @@ class TelegramController extends BaseController
                 }
             }
         }
+    }
+
+    /**
+     * handle any errors throw during parsing the response
+     * @param \Exception $error
+     * @return mixed
+     * @throws TelegramException
+     */
+    private function handleError(\Exception $error)
+    {
+        if ($exceptionHandler = config('telegram.ExceptionHandler')) {
+            return (new $exceptionHandler($error))->handler();
+        }
+
+        throw new TelegramException($error->getMessage(), $error->getCode());
     }
 
 }

@@ -29,5 +29,11 @@
             }
         }
     },
-    "require": {}
+    "require": {
+        "php": "^7.0",
+        "illuminate/routing": "~5.0",
+        "illuminate/database": "~5.0",
+        "illuminate/support": "~5.0",
+        "illuminate/http": "~5.0"
+    }
 }

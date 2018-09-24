@@ -28,4 +28,10 @@ class Contact extends BaseTelegram {
      */
     protected $user_id;
 
+    /**
+     * @var string|null $vcard
+     * Additional data about the contact in the form of a vCard
+     */
+    protected $vcard;
+
 }

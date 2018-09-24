@@ -76,6 +76,12 @@ Class Message extends BaseTelegram {
     protected $edit_date;
 
     /**
+     * @var string|null $edit_date
+     * The unique identifier of a media message group this message belongs to
+     */
+    protected $media_group_id;
+
+    /**
      * @var string|null $author_signature
      * Signature of the post author for messages in channel
      */
@@ -110,6 +116,12 @@ Class Message extends BaseTelegram {
      * Message is a general file, information about the file
      */
     protected $document;
+
+    /**
+     * @var Animation|null $animation
+     * Message is an animation, information about the animation. For backward compatibility, when this field is set, the document field will also be set
+     */
+    protected $animation;
 
     /**
      * @var Game|null
@@ -256,5 +268,17 @@ Class Message extends BaseTelegram {
      * Message is a service message about a successful payment, information about the payment.
      */
     protected $successful_payment;
+
+    /**
+     * @var string|null
+     * The domain name of the website on which the user has logged in
+     */
+    protected $connected_website;
+
+    /**
+     * @var PassportData|null
+     * Telegram Passport data
+     */
+    protected $passport_data;
 
 }
