@@ -10,6 +10,7 @@ namespace Alish\Telegram;
 
 
 use Alish\Telegram\API\Message;
+use Alish\Telegram\API\Update;
 use Alish\Telegram\Facades\Telegram;
 
 abstract class TelegramCommand
@@ -18,9 +19,11 @@ abstract class TelegramCommand
     protected $message;
     protected $chatId;
     protected $userId;
+    protected $update;
 
-    public function __construct(Message $message)
+    public function __construct(Update $update, Message $message)
     {
+        $this->update = $update;
         $this->message = $message;
         $this->chatId = $message->getChat()->getId();
         $this->userId = $message->getFrom()->getId();

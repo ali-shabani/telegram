@@ -191,7 +191,7 @@ class TelegramController extends BaseController
             if ($command = $this->commandHandler($update)) {
                 if (class_exists($command)) {
                     $message = $update->getMessage();
-                    $class = new $command($message);
+                    $class = new $command($update, $message);
                     if ($class instanceof TelegramCommand) {
                         $class->handler();
                         return true;
