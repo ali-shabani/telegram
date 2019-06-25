@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\Http\Controllers;
 
-
 use Alish\Telegram\API\Update;
 use Alish\Telegram\Exception\NoTelegramHandlerFoundException;
 use Alish\Telegram\Exception\TelegramException;
@@ -13,10 +12,10 @@ use Alish\Telegram\Parser\Parser;
 use Alish\Telegram\TelegramCommand;
 use Alish\Telegram\TelegramLoader;
 use Alish\Telegram\TelegramUpdateHandler;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class TelegramController extends BaseController
 {
@@ -32,8 +31,10 @@ class TelegramController extends BaseController
 
     /**
      * @param Request $request
-     * @return Response
+     *
      * @throws TelegramException
+     *
+     * @return Response
      */
     public function __invoke(Request $request)
     {
@@ -41,12 +42,11 @@ class TelegramController extends BaseController
             $inputs = $request->all();
             $update = Parser::parse(Update::class, $inputs);
 
-            if($this->isNewRequest($update)) {
+            if ($this->isNewRequest($update)) {
                 $this->handleRequest($update);
                 $this->saveRequest($update, $inputs);
             }
-        }
-        catch (\Exception $error) {
+        } catch (\Exception $error) {
             $this->handleError($error);
         }
 
@@ -54,8 +54,10 @@ class TelegramController extends BaseController
     }
 
     /**
-     * check if this response is fresh or not
+     * check if this response is fresh or not.
+     *
      * @param Update $update
+     *
      * @return bool
      */
     private function isNewRequest(Update $update)
@@ -64,21 +66,24 @@ class TelegramController extends BaseController
     }
 
     /**
-     * save request to database for avoiding duplicate response and have a log for them
+     * save request to database for avoiding duplicate response and have a log for them.
+     *
      * @param Update $update
      * @param $inputs
+     *
      * @return TelegramUpdate
      */
     private function saveRequest(Update $update, $inputs)
     {
         return TelegramUpdate::create([
             'update_id' => $update->getUpdateId(),
-            'result' => json_encode($inputs)
+            'result'    => json_encode($inputs),
         ]);
     }
 
     /**
      * @param Update $update
+     *
      * @throws NoTelegramHandlerFoundException
      * @throws \ReflectionException
      */
@@ -99,17 +104,19 @@ class TelegramController extends BaseController
 
         if ($handler) {
             $handler->handler();
+
             return;
         }
 
         throw new NoTelegramHandlerFoundException();
-
     }
 
     /**
      * @param Update $update
-     * @return array|null
+     *
      * @throws \ReflectionException
+     *
+     * @return array|null
      */
     private function getUpdateType(Update $update)
     {
@@ -120,14 +127,12 @@ class TelegramController extends BaseController
                 $getter = $this->docBlockParser->getGetter($key);
                 if ($update->$getter()) {
                     return [
-                        'key' => studly_case($key),
-                        'type' => $this->docBlockParser->getTypeOfProperty($property)
+                        'key'  => studly_case($key),
+                        'type' => $this->docBlockParser->getTypeOfProperty($property),
                     ];
                 }
             }
         }
-
-        return null;
     }
 
     /**
@@ -136,15 +141,14 @@ class TelegramController extends BaseController
      */
     private function setUser($update, $type)
     {
-
-        $method = 'get' . studly_case($type);
+        $method = 'get'.studly_case($type);
         $result = $update->$method();
         Telegram::setUser($result->getFrom());
     }
 
-
     /**
      * @param Update $update
+     *
      * @return null
      */
     private function commandHandler(Update $update)
@@ -153,23 +157,19 @@ class TelegramController extends BaseController
         $text = $message->getText();
 
         if ($entities = $message->getEntities()) {
-
             if (count($entities) === 1) {
                 $entity = $entities[0];
                 $type = $entity->getType();
 
-                if ($type === "bot_command") {
+                if ($type === 'bot_command') {
                     $offset = $entity->getOffset();
                     $length = $entity->getLength();
                     $command = substr($text, $offset + 1, $length);
-                    return config('telegram.commands.list.' . $command);
+
+                    return config('telegram.commands.list.'.$command);
                 }
-
             }
-
         }
-
-        return null;
     }
 
     /**
@@ -183,6 +183,7 @@ class TelegramController extends BaseController
     /**
      * @param $type
      * @param Update $update
+     *
      * @return bool
      */
     private function handleCommand($type, Update $update)
@@ -194,6 +195,7 @@ class TelegramController extends BaseController
                     $class = new $command($update, $message);
                     if ($class instanceof TelegramCommand) {
                         $class->handler();
+
                         return true;
                     }
                 }
@@ -206,6 +208,7 @@ class TelegramController extends BaseController
     /**
      * @param $type
      * @param $update
+     *
      * @return null
      */
     private function getHandlerInstance($type, $update)
@@ -217,18 +220,16 @@ class TelegramController extends BaseController
                 return $instance;
             }
         }
-
-        return null;
-
     }
 
     /**
      * @param $type
+     *
      * @return mixed
      */
     private function getHandler($type)
     {
-        return config('telegram.handlers.' . $type, null);
+        return config('telegram.handlers.'.$type, null);
     }
 
     /**
@@ -248,10 +249,13 @@ class TelegramController extends BaseController
     }
 
     /**
-     * handle any errors throw during parsing the response
+     * handle any errors throw during parsing the response.
+     *
      * @param \Exception $error
-     * @return mixed
+     *
      * @throws TelegramException
+     *
+     * @return mixed
      */
     private function handleError(\Exception $error)
     {
@@ -261,5 +265,4 @@ class TelegramController extends BaseController
 
         throw new TelegramException($error->getMessage(), $error->getCode());
     }
-
 }

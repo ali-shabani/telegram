@@ -1,11 +1,12 @@
 <?php
 
-if (! function_exists('str_start')) {
+if (!function_exists('str_start')) {
     /**
      * Begin a string with a single instance of a given value.
      *
-     * @param  string  $value
-     * @param  string  $prefix
+     * @param string $value
+     * @param string $prefix
+     *
      * @return string
      */
     function str_start($value, $prefix)

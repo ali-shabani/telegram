@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Alish\Telegram;
-
 
 use Alish\Telegram\API\Update;
 
 abstract class TelegramLoader
 {
-
     protected $update;
 
     public function __construct(Update $update)
@@ -17,5 +14,4 @@ abstract class TelegramLoader
     }
 
     abstract public function process();
-
 }

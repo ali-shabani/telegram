@@ -1,19 +1,18 @@
-<?php 
+<?php
 
     return [
 
         'defaults' => [
             'token_bot' => '',
-            'webhook' => '',
+            'webhook'   => '',
         ],
 
         'commands' => [
             'active' => false,
-            'list' => [
-                'start' => 'App\Class'
-            ]
+            'list'   => [
+                'start' => 'App\Class',
+            ],
         ],
-
 
         'handlers' => [
             'CallbackQuery'      => null,
@@ -25,7 +24,7 @@
             'Message'            => null,
             'ShippingQuery'      => null,
             'PreCheckoutQuery'   => null,
-            'ExceptionHandler'   => null
+            'ExceptionHandler'   => null,
         ],
 
         /*
@@ -36,6 +35,6 @@
         'ExceptionHandler' => null,
 
         'loaders' => [
-            
-        ]
+
+        ],
     ];

@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: pyramid
  * Date: 11/15/17
- * Time: 1:42 PM
+ * Time: 1:42 PM.
  */
 
 namespace Alish\Telegram;
-
 
 abstract class TelegramUpdateHandler
 {

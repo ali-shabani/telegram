@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\Template;
 
-
 class InputFile
 {
     public static function getFile($path)

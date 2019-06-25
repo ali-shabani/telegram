@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class TelegramUpdate extends Model
 {
     protected $fillable = [
-        'update_id', 'result'
+        'update_id', 'result',
     ];
 }

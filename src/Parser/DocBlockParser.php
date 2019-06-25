@@ -3,34 +3,33 @@
  * Created by PhpStorm.
  * User: pyramid
  * Date: 11/15/17
- * Time: 12:22 AM
+ * Time: 12:22 AM.
  */
 
 namespace Alish\Telegram\Parser;
 
-
 class DocBlockParser
 {
-
     private $primaryTypes = ['string', 'integer', 'float', 'double', 'boolean', 'bool', 'true'];
 
     public function getSetter($key)
     {
-        return 'set' . studly_case($key);
+        return 'set'.studly_case($key);
     }
 
     public function getGetter($key)
     {
-        return 'get' . studly_case($key);
+        return 'get'.studly_case($key);
     }
 
     public function getTypes(\ReflectionProperty $property)
     {
         $matches = $this->getTypeMatches($property);
         if (count($matches) < 1) {
-            return null;
+            return;
         }
         $types = collect(explode('|', trim(str_replace('@var ', '', $matches[0]))));
+
         return $types;
     }
 
@@ -38,7 +37,7 @@ class DocBlockParser
     {
         $types = $this->getTypes($property);
         if (!$types) {
-            return null;
+            return;
         }
         $filtered = $types->filter(function ($type) {
             return strtolower($type) !== 'null';
@@ -51,18 +50,22 @@ class DocBlockParser
     {
         $comment = $property->getDocComment();
         preg_match('/@var .* /', $comment, $matches);
+
         return $matches;
     }
 
-    public function isPrimaryType($type) {
+    public function isPrimaryType($type)
+    {
         return in_array(strtolower($type), $this->primaryTypes);
     }
 
-    public function isObjectType($type) {
+    public function isObjectType($type)
+    {
         return !$this->isPrimaryType($type) && !strpos($type, '[]');
     }
 
-    public function isArrayType($type) {
+    public function isArrayType($type)
+    {
         return !$this->isPrimaryType($type) && !$this->isObjectType($type);
     }
 
@@ -77,7 +80,7 @@ class DocBlockParser
         $filtered = $types->filter(function ($type) {
             return strtolower($type) === 'null';
         });
+
         return count($filtered) > 0;
     }
-    
 }

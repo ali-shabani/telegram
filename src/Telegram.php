@@ -6,8 +6,7 @@ use Alish\Telegram\API\User;
 use Alish\Telegram\Http\TelegramRequest;
 use Alish\Telegram\Parser\Parser;
 
-
-class TelegramFactory
+class Telegram
 {
     private $chatId;
     private $user;
@@ -15,6 +14,7 @@ class TelegramFactory
     public function chatId($chatId)
     {
         $this->chatId = $chatId;
+
         return $this;
     }
 
@@ -53,46 +53,46 @@ class TelegramFactory
          *
          */
 
-        isset($args[0]) ? $model = $args[0]: $model = null;
-        isset($args[1]) ? $request = $args[1]: $request = null;
+        isset($args[0]) ? $model = $args[0] : $model = null;
+        isset($args[1]) ? $request = $args[1] : $request = null;
 
-        if(count($args) == 1 && is_array($args[0])) {
+        if (count($args) == 1 && is_array($args[0])) {
             $request = $args[0];
             $model = null;
         }
 
-
-        if($this->chatId)
+        if ($this->chatId) {
             $request['chat_id'] = $this->chatId;
+        }
 
         $response = TelegramRequest::request($request, $method);
 
-        if(!$response) {
-            return null;
+        if (!$response) {
+            return;
         }
 
-        if($response->ok == true) {
-
-            if(is_bool($response->result) || is_null($model))
+        if ($response->ok == true) {
+            if (is_bool($response->result) || is_null($model)) {
                 return $response->result;
+            }
 
-            if(is_array($response->result)) {
+            if (is_array($response->result)) {
                 $results = collect();
                 foreach ($response->result as $result) {
                     $results->push($this->jsonMapper($result, $model));
                 }
+
                 return $results;
             }
 
             return $this->jsonMapper($response->result, $model);
         }
-
-        return null;
     }
 
     protected function jsonMapper($inputs, $class)
     {
         $result = Parser::parse($class, $inputs);
+
         return $result;
     }
 
@@ -105,5 +105,4 @@ class TelegramFactory
     {
         return $this->user;
     }
-
 }

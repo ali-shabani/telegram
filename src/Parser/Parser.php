@@ -2,9 +2,8 @@
 
 namespace Alish\Telegram\Parser;
 
-class Parser {
-
-
+class Parser
+{
     private $namespace = "Alish\Telegram\API\\";
     private $docBlockParser;
 
@@ -18,7 +17,7 @@ class Parser {
         $className = str_start($className, $this->namespace);
         $reflection = new \ReflectionClass($className);
         $properties = $reflection->getProperties();
-        $instance = new $className;
+        $instance = new $className();
 
         foreach ($properties as $property) {
             $key = $property->getName();
@@ -33,16 +32,13 @@ class Parser {
 
             if ($this->docBlockParser->isPrimaryType($type)) {
                 $instance->$setter($value);
-            }
-            else if ($this->docBlockParser->isObjectType($type)) {
+            } elseif ($this->docBlockParser->isObjectType($type)) {
                 $output = $this->parser($type, $value);
                 $instance->$setter($output);
-            }
-            else if ($this->docBlockParser->isArrayType($type)) {
+            } elseif ($this->docBlockParser->isArrayType($type)) {
                 $output = $this->parseArray($type, $value);
                 $instance->$setter($output);
             }
-
         }
 
         return $instance;
@@ -62,7 +58,7 @@ class Parser {
     public static function parse($className, $inputs)
     {
         $parser = new self();
+
         return $parser->parser($className, $inputs);
     }
-
 }

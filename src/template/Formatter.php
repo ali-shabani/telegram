@@ -7,56 +7,45 @@ class Formatter
     public static function bold($text, $parseMode)
     {
         if ($parseMode == ParseMode::HTML) {
-            return '<b>' . $text . '</b>';
+            return '<b>'.$text.'</b>';
+        } elseif ($parseMode == ParseMode::Markdown) {
+            return '*'.$text.'*';
         }
-        else if ($parseMode == ParseMode::Markdown) {
-            return '*' . $text . '*';
-        }
-        return null;
     }
 
     public static function italic($text, $parseMode)
     {
         if ($parseMode == ParseMode::HTML) {
-            return '<i>' . $text . '</i>';
+            return '<i>'.$text.'</i>';
+        } elseif ($parseMode == ParseMode::Markdown) {
+            return '_'.$text.'_';
         }
-        else if ($parseMode == ParseMode::Markdown) {
-            return '_' . $text . '_';
-        }
-        return null;
     }
 
     public static function link($text, $parseMode, $link)
     {
         if ($parseMode == ParseMode::HTML) {
-            return '<a href="' . $link . '" >"' . $text . '</a>';
+            return '<a href="'.$link.'" >"'.$text.'</a>';
+        } elseif ($parseMode == ParseMode::Markdown) {
+            return '['.$text.']('.$link.')';
         }
-        else if ($parseMode == ParseMode::Markdown) {
-            return '[' . $text . '](' . $link . ')';
-        }
-        return null;
     }
 
     public static function code($text, $parseMode)
     {
         if ($parseMode == ParseMode::HTML) {
-            return '<code>' . $text . '</code>';
+            return '<code>'.$text.'</code>';
+        } elseif ($parseMode == ParseMode::Markdown) {
+            return '`'.$text.'`';
         }
-        else if ($parseMode == ParseMode::Markdown) {
-            return '`' . $text . '`';
-        }
-        return null;
     }
 
     public static function pre($text, $parseMode)
     {
         if ($parseMode == ParseMode::HTML) {
-            return '<pre>' . $text . '</pre>';
+            return '<pre>'.$text.'</pre>';
+        } elseif ($parseMode == ParseMode::Markdown) {
+            return '```'.$text.'```';
         }
-        else if ($parseMode == ParseMode::Markdown) {
-            return '```' . $text . '```';
-        }
-        return null;
     }
 }
-
