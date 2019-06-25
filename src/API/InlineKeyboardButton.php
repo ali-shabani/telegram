@@ -17,6 +17,12 @@ class InlineKeyboardButton extends BaseTelegram {
     protected $url;
 
     /**
+     * @var LoginUrl|null $login_url
+     * Optional. An HTTP URL used to automatically authorize the user. Can be used as a replacement for the Telegram Login Widget.
+     */
+    protected $login_url;
+
+    /**
      * @var null|String $callback_data
      * Optional. Data to be sent in a callback query to the bot when button is pressed, 1-64 bytes
      */

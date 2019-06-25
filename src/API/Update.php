@@ -65,4 +65,10 @@ class Update extends BaseTelegram {
      * Optional. New incoming pre-checkout query. Contains full information about checkout
      */
     protected $pre_checkout_query;
+
+    /**
+     * @var Poll|null $poll
+     * Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot
+     */
+    protected $poll;
 }

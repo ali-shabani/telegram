@@ -281,4 +281,10 @@ Class Message extends BaseTelegram {
      */
     protected $passport_data;
 
+    /**
+     * @var InlineKeyboardMarkup|null
+     * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
+     */
+    protected $reply_markup;
+
 }
