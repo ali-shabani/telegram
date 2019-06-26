@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Alish\Telegram\Command;
-
 
 use Alish\Telegram\API\Message;
 use Alish\Telegram\API\Update;
@@ -22,7 +20,8 @@ class Command
 
     /**
      * Command constructor.
-     * @param  Update  $update
+     *
+     * @param Update $update
      */
     public function __construct(Update $update)
     {
@@ -43,7 +42,7 @@ class Command
      * Unique identifier for this chat. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it.
      * But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.
      *
-     * @return integer
+     * @return int
      */
     protected function chatId() : int
     {
@@ -51,7 +50,7 @@ class Command
     }
 
     /**
-     * Sender, empty for messages sent to channels
+     * Sender, empty for messages sent to channels.
      *
      * @return User
      */
@@ -59,5 +58,4 @@ class Command
     {
         return $this->message()->getFrom();
     }
-
 }

@@ -2,14 +2,12 @@
 
 namespace Alish\Telegram\Parser;
 
-
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionProperty;
 
 class DocBlockParser
 {
-
     /**
      * @var array
      */
@@ -20,11 +18,12 @@ class DocBlockParser
         'double',
         'boolean',
         'bool',
-        'true'
+        'true',
     ];
 
     /**
-     * @param  string  $key
+     * @param string $key
+     *
      * @return string
      */
     public function getSetter(string $key): string
@@ -33,7 +32,8 @@ class DocBlockParser
     }
 
     /**
-     * @param  string  $key
+     * @param string $key
+     *
      * @return string
      */
     public function getGetter(string $key): string
@@ -42,7 +42,8 @@ class DocBlockParser
     }
 
     /**
-     * @param  ReflectionProperty  $property
+     * @param ReflectionProperty $property
+     *
      * @return string|null
      */
     public function getTypeOfProperty(ReflectionProperty $property): ?string
@@ -59,7 +60,8 @@ class DocBlockParser
     }
 
     /**
-     * @param  ReflectionProperty  $property
+     * @param ReflectionProperty $property
+     *
      * @return Collection|null
      */
     public function getTypes(ReflectionProperty $property): ?Collection
@@ -74,18 +76,21 @@ class DocBlockParser
     }
 
     /**
-     * @param  ReflectionProperty  $property
+     * @param ReflectionProperty $property
+     *
      * @return array
      */
     public function getTypeMatches(ReflectionProperty $property): array
     {
         $comment = $property->getDocComment();
         preg_match('/@var .* /', $comment, $matches);
+
         return $matches;
     }
 
     /**
-     * @param  string  $type
+     * @param string $type
+     *
      * @return bool
      */
     public function isArrayType(string $type): bool
@@ -94,7 +99,8 @@ class DocBlockParser
     }
 
     /**
-     * @param  string  $type
+     * @param string $type
+     *
      * @return bool
      */
     public function isPrimaryType(string $type): bool
@@ -103,7 +109,8 @@ class DocBlockParser
     }
 
     /**
-     * @param  string  $type
+     * @param string $type
+     *
      * @return bool
      */
     public function isObjectType(string $type): bool
@@ -112,7 +119,8 @@ class DocBlockParser
     }
 
     /**
-     * @param  string  $type
+     * @param string $type
+     *
      * @return string
      */
     public function arrayType(string $type): string
@@ -121,7 +129,8 @@ class DocBlockParser
     }
 
     /**
-     * @param  ReflectionProperty  $property
+     * @param ReflectionProperty $property
+     *
      * @return bool
      */
     public function isNullable(ReflectionProperty $property): bool
@@ -129,8 +138,7 @@ class DocBlockParser
         $types = $this->getTypes($property);
 
         return $types->filter(function ($type) {
-                return strtolower($type) === 'null';
-            })->count() > 0;
+            return strtolower($type) === 'null';
+        })->count() > 0;
     }
-
 }

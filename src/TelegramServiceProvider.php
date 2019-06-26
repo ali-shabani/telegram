@@ -2,8 +2,8 @@
 
 namespace Alish\Telegram;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Illuminate\Support\ServiceProvider;
 
 class TelegramServiceProvider extends ServiceProvider
 {
@@ -31,7 +31,7 @@ class TelegramServiceProvider extends ServiceProvider
 
         $this->publishes(
             [
-                __DIR__.'/config/config.php' => config_path('telegram.php')
+                __DIR__.'/config/config.php' => config_path('telegram.php'),
             ], 'config'
         );
     }
@@ -58,7 +58,7 @@ class TelegramServiceProvider extends ServiceProvider
 
     public function provides()
     {
-        return array('Telegram');
+        return ['Telegram'];
     }
 
     protected function getDefaultToken()
@@ -69,11 +69,11 @@ class TelegramServiceProvider extends ServiceProvider
             return config("telegram.bots.$default.token");
         }
 
-        return config("telegram.bots")[0]['token'];
+        return config('telegram.bots')[0]['token'];
     }
 
     protected function shouldAsync()
     {
-        return config("telegram.async", false);
+        return config('telegram.async', false);
     }
 }

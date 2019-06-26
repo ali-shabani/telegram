@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 use Alish\Telegram\API\Chat;
 use Alish\Telegram\API\User;
@@ -10,11 +8,10 @@ use Alish\Telegram\TelegramMethods;
 
 class CallbackQuery extends Base
 {
-
     use TelegramMethods;
 
     /**
-     * New incoming callback query
+     * New incoming callback query.
      *
      * @return \Alish\Telegram\API\CallbackQuery
      */
@@ -24,7 +21,7 @@ class CallbackQuery extends Base
     }
 
     /**
-     * Sender
+     * Sender.
      *
      * @return User
      */
@@ -35,7 +32,7 @@ class CallbackQuery extends Base
 
     /**
      * Message with the callback button that originated the query.
-     * Note that message content and message date will not be available if the message is too old
+     * Note that message content and message date will not be available if the message is too old.
      *
      * @return \Alish\Telegram\API\Message
      */
@@ -69,5 +66,4 @@ class CallbackQuery extends Base
     {
         return $this->chat()->getId();
     }
-
 }

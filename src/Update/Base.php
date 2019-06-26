@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 use Alish\Telegram\API\Update;
 
@@ -15,11 +13,11 @@ class Base
 
     /**
      * Base constructor.
-     * @param  Update  $update
+     *
+     * @param Update $update
      */
     public function __construct(Update $update)
     {
         $this->update = $update;
     }
-
 }

@@ -2,26 +2,23 @@
 
 namespace Alish\Telegram\API;
 
-
 class PassportFile extends BaseTelegram
 {
-
     /**
      * @var string
-     * Unique identifier for this file
+     *             Unique identifier for this file
      */
     protected $file_id;
 
     /**
-     * @var integer
-     * File size
+     * @var int
+     *          File size
      */
     protected $file_size;
 
     /**
-     * @var integer
-     * Unix time when the file was uploaded
+     * @var int
+     *          Unix time when the file was uploaded
      */
     protected $file_date;
-
 }

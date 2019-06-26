@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 use Alish\Telegram\API\User;
 
 class ChosenInlineResult extends Base
 {
-
     /**
      * The result of an inline query that was chosen by a user and sent to their chat partner.
      * Please see our documentation on the feedback collecting for details on how to enable these updates for your bot.
@@ -21,7 +18,7 @@ class ChosenInlineResult extends Base
     }
 
     /**
-     * The unique identifier for the result that was chosen
+     * The unique identifier for the result that was chosen.
      *
      * @return string
      */
@@ -31,7 +28,7 @@ class ChosenInlineResult extends Base
     }
 
     /**
-     * The user that chose the result
+     * The user that chose the result.
      *
      * @return User
      */
@@ -41,7 +38,7 @@ class ChosenInlineResult extends Base
     }
 
     /**
-     * 	The query that was used to obtain the result
+     * 	The query that was used to obtain the result.
      *
      * @return string
      */
@@ -49,5 +46,4 @@ class ChosenInlineResult extends Base
     {
         return $this->chosenInlineResult()->getQuery();
     }
-
 }
