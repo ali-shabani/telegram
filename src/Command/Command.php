@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Alish\Telegram\Command;
-
 
 use Alish\Telegram\API\Message;
 use Alish\Telegram\API\Update;
@@ -22,7 +20,8 @@ class Command
 
     /**
      * Command constructor.
-     * @param  Update  $update
+     *
+     * @param Update $update
      */
     public function __construct(Update $update)
     {
@@ -51,7 +50,7 @@ class Command
     }
 
     /**
-     * Sender, empty for messages sent to channels
+     * Sender, empty for messages sent to channels.
      *
      * @return User
      */
@@ -59,5 +58,4 @@ class Command
     {
         return $this->message()->getFrom();
     }
-
 }

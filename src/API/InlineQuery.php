@@ -2,36 +2,35 @@
 
 namespace Alish\Telegram\API;
 
-class InlineQuery extends BaseTelegram {
-
+class InlineQuery extends BaseTelegram
+{
     /**
-     * @var string $id
-     * Unique identifier for this query
+     * @var string
+     *             Unique identifier for this query
      */
     protected $id;
 
     /**
-     * @var User $from
-     * Telegram
+     * @var User
+     *           Telegram
      */
     protected $from;
 
     /**
-     * @var Location|null $location
-     * Optional. Telegram location, only for bots that request user location
+     * @var Location|null
+     *                    Optional. Telegram location, only for bots that request user location
      */
     protected $location;
 
     /**
-     * @var string $query
-     * Text of the query (up to 512 characters)
+     * @var string
+     *             Text of the query (up to 512 characters)
      */
     protected $query;
 
     /**
-     * @var string $offset
-     * Offset of the results to be returned, can be controlled by the bot
+     * @var string
+     *             Offset of the results to be returned, can be controlled by the bot
      */
     protected $offset;
-
 }

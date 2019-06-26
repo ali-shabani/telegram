@@ -1,14 +1,11 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 class ChannelPost extends Message
 {
-
     /**
-     * New version of a message that is known to the bot and was edited
+     * New version of a message that is known to the bot and was edited.
      *
      * @return \Alish\Telegram\API\Message
      */
@@ -16,5 +13,4 @@ class ChannelPost extends Message
     {
         return $this->update->getChannelPost();
     }
-
 }

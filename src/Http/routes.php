@@ -5,8 +5,7 @@ $webhooks = collect(config('telegram.bots'))
         return isset($bot['webhook']) ? $bot['webhook'] : $bot['token'];
     })->implode('|');
 
-
 Route::post('bot/{$webhook}', 'Alish\Telegram\Http\Controllers\UpdateController')
     ->where([
-        'webhook' => $webhooks
+        'webhook' => $webhooks,
     ]);

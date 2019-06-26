@@ -8,8 +8,8 @@ use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
 
-class Parser {
-
+class Parser
+{
     /**
      * @var string
      */
@@ -27,19 +27,20 @@ class Parser {
 
     /**
      * @param string $class
-     * @param array $inputs
-     * @return mixed
+     * @param array  $inputs
+     *
      * @throws ReflectionException
+     *
+     * @return mixed
      */
     public function parser(string $class, array $inputs)
     {
         $class = $this->reviseClass($class);
 
         $properties = $this->getClassProperties($class);
-        $concrete = new $class;
+        $concrete = new $class();
 
         foreach ($properties as $property) {
-
             [$propertyName] = $this->getPropertyAttributes($property);
 
             if (!$this->isInputValidFoProperty($property, $inputs)) {
@@ -54,8 +55,9 @@ class Parser {
 
     /**
      * @param $concrete
-     * @param  ReflectionProperty  $property
+     * @param ReflectionProperty $property
      * @param $value
+     *
      * @throws ReflectionException
      */
     protected function setConcreteProperty($concrete, ReflectionProperty $property, $value)
@@ -64,18 +66,21 @@ class Parser {
 
         if ($this->docBlockParser->isPrimaryType($propertyType)) {
             $concrete->$propertySetter($value);
+
             return;
         }
 
         if ($this->docBlockParser->isObjectType($propertyType)) {
             $output = $this->parser($propertyType, $value);
             $concrete->$propertySetter($output);
+
             return;
         }
 
         if ($this->docBlockParser->isArrayType($propertyType)) {
             $output = $this->parseArray($propertyType, $value);
             $concrete->$propertySetter($output);
+
             return;
         }
     }
@@ -83,6 +88,7 @@ class Parser {
     /**
      * @param $property
      * @param $inputs
+     *
      * @return bool
      */
     protected function isInputValidFoProperty($property, $inputs)
@@ -93,7 +99,8 @@ class Parser {
     }
 
     /**
-     * @param  ReflectionProperty  $property
+     * @param ReflectionProperty $property
+     *
      * @return array
      */
     protected function getPropertyAttributes(ReflectionProperty $property) : array
@@ -101,12 +108,13 @@ class Parser {
         return [
             $key = $property->getName(),
             $this->docBlockParser->getTypeOfProperty($property),
-            $this->docBlockParser->getSetter($key)
+            $this->docBlockParser->getSetter($key),
         ];
     }
 
     /**
-     * @param  string  $class
+     * @param string $class
+     *
      * @return string
      */
     protected function reviseClass(string $class) : string
@@ -115,19 +123,23 @@ class Parser {
     }
 
     /**
-     * @param  string  $class
-     * @return ReflectionProperty[]
+     * @param string $class
+     *
      * @throws ReflectionException
+     *
+     * @return ReflectionProperty[]
      */
     protected function getClassProperties(string $class)
     {
         $reflection = new ReflectionClass($class);
+
         return $reflection->getProperties();
     }
 
     /**
-     * @param  string  $type
-     * @param  array  $value
+     * @param string $type
+     * @param array  $value
+     *
      * @return array
      */
     protected function parseArray(string $type, array $value) : array
@@ -141,13 +153,14 @@ class Parser {
 
     /**
      * @param $className
-     * @param  array  $inputs
-     * @return mixed
+     * @param array $inputs
+     *
      * @throws ReflectionException
+     *
+     * @return mixed
      */
     public static function parse($className, array $inputs)
     {
         return (new self())->parser($className, $inputs);
     }
-
 }

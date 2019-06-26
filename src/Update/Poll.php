@@ -1,16 +1,13 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 use Alish\Telegram\API\PollOption;
 
 class Poll extends Base
 {
-
     /**
-     * New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot
+     * New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot.
      *
      * @return \Alish\Telegram\API\Poll
      */
@@ -20,7 +17,7 @@ class Poll extends Base
     }
 
     /**
-     * 	Unique poll identifier
+     * 	Unique poll identifier.
      *
      * @return string
      */
@@ -30,7 +27,7 @@ class Poll extends Base
     }
 
     /**
-     * 	Poll question, 1-255 characters
+     * 	Poll question, 1-255 characters.
      *
      * @return string
      */
@@ -40,7 +37,7 @@ class Poll extends Base
     }
 
     /**
-     * List of poll options
+     * List of poll options.
      *
      * @return PollOption[]
      */
@@ -50,7 +47,7 @@ class Poll extends Base
     }
 
     /**
-     * True, if the poll is closed
+     * True, if the poll is closed.
      *
      * @return bool
      */
@@ -58,5 +55,4 @@ class Poll extends Base
     {
         return $this->poll()->getIsClosed();
     }
-
 }
