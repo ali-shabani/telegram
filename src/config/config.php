@@ -19,22 +19,22 @@
         'commands' => [
             'active' => false,
             'list' => [
-                'start' => 'App\Class'
+
             ]
         ],
 
         // define handlers for different type of updates that receive from telegram
         'updates' => [
-            'CallbackQuery'      => null,
-            'ChannelPost'        => null,
-            'ChosenInlineResult' => null,
-            'EditedChannelPost'  => null,
-            'EditedMessage'      => null,
-            'InlineQuery'        => null,
-            'Message'            => null,
-            'ShippingQuery'      => null,
-            'PreCheckoutQuery'   => null,
-            'ExceptionHandler'   => null
+            'message'      => null,
+            'edited_message'        => null,
+            'channel_post' => null,
+            'edited_channel_post'  => null,
+            'inline_query'      => null,
+            'chosen_inline_result'        => null,
+            'callback_query'            => null,
+            'shipping_query'      => null,
+            'pre_checkout_query'   => null,
+            'poll'   => null
         ],
 
         // you can define middleware for operating actions on telegram update object before it pass to relevant handler
