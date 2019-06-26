@@ -2,36 +2,35 @@
 
 namespace Alish\Telegram\API;
 
-class VideoNote extends BaseTelegram {
-
+class VideoNote extends BaseTelegram
+{
     /**
-     * @var string $file_id
+     * @var string
      * Unique identifier for this file
      */
     protected $file_id;
 
     /**
-     * @var integer $length
+     * @var int
      * Video width and height as defined by sender
      */
     protected $length;
 
     /**
-     * @var integer $duration
+     * @var int
      * Duration of the video in seconds as defined by sender
      */
     protected $duration;
 
     /**
-     * @var PhotoSize|null $thumb
+     * @var PhotoSize|null
      * Optional. Video thumbnail
      */
     protected $thumb;
 
     /**
-     * @var integer|null $file_size
+     * @var int|null
      * Optional. File size
      */
     protected $file_size;
-
 }

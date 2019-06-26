@@ -1,16 +1,13 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 use Alish\Telegram\API\User;
 
 class InlineQuery extends Base
 {
-
     /**
-     * New incoming inline query
+     * New incoming inline query.
      *
      * @return \Alish\Telegram\API\InlineQuery
      */
@@ -20,7 +17,7 @@ class InlineQuery extends Base
     }
 
     /**
-     * Sender
+     * Sender.
      *
      * @return User
      */
@@ -30,7 +27,7 @@ class InlineQuery extends Base
     }
 
     /**
-     * Text of the query (up to 512 characters)
+     * Text of the query (up to 512 characters).
      *
      * @return string
      */
@@ -40,7 +37,7 @@ class InlineQuery extends Base
     }
 
     /**
-     * Offset of the results to be returned, can be controlled by the bot
+     * Offset of the results to be returned, can be controlled by the bot.
      *
      * @return string
      */
@@ -48,5 +45,4 @@ class InlineQuery extends Base
     {
         return $this->inlineQuery()->getOffset();
     }
-
 }

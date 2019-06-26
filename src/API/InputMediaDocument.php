@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: alish
  * Date: 9/24/18
- * Time: 9:09 AM
+ * Time: 9:09 AM.
  */
 
 namespace Alish\Telegram\API;
-
 
 use Alish\Telegram\Template\InputFile;
 
@@ -44,5 +43,4 @@ class InputMediaDocument extends BaseTelegram
      * Send Markdown or HTML, if you want Telegram apps to show bold, italic, fixed-width text or inline URLs in the media caption.
      */
     protected $parse_mode;
-
 }

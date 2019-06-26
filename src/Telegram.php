@@ -1,31 +1,27 @@
 <?php
 
-
 namespace Alish\Telegram;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Response;
-use Illuminate\Contracts\Events\Dispatcher;
+use GuzzleHttp\Promise\Promise;
 use Illuminate\Support\Collection;
+use Illuminate\Contracts\Events\Dispatcher;
 
 /**
- * Class Telegram
- * @package Alish\Telegram\Http
- *
+ * Class Telegram.
  */
 class Telegram
 {
-
     /**
-     * client for sending requests
+     * client for sending requests.
      *
      * @var Client
      */
     protected $client;
 
     /**
-     * client timeout to make a request
+     * client timeout to make a request.
      *
      * @var int
      */
@@ -37,39 +33,39 @@ class Telegram
     protected $bot;
 
     /**
-     * whether request should be in sync mode or not
+     * whether request should be in sync mode or not.
      *
-     * @var boolean
+     * @var bool
      */
     protected $async;
 
     /**
-     * chatId
+     * chatId.
      *
      * @var int
      */
     protected $chatId;
 
     /**
-     * event dispatcher
+     * event dispatcher.
      *
      * @var Dispatcher
      */
     protected $events;
 
     /**
-     * request headers
+     * request headers.
      *
      * @var array
      */
     protected $headers = [
-        'Accept' => 'application/json'
+        'Accept' => 'application/json',
     ];
 
     /**
      * Telegram constructor.
      * @param  string|null  $token
-     * @param  boolean  $async
+     * @param  bool  $async
      */
     public function __construct(string $token, bool $async)
     {
@@ -93,13 +89,13 @@ class Telegram
             ->map(function ($bot, $name) {
                 return ['name' => $name, 'bot' => $bot];
             })
-            ->first(function ($bot) use($token) {
+            ->first(function ($bot) use ($token) {
                 return $bot['bot']['token'] === $token;
             });
     }
 
     /**
-     * set request to be async or not
+     * set request to be async or not.
      *
      * @param  bool  $async
      * @return self
@@ -107,6 +103,7 @@ class Telegram
     public function async($async = true) : self
     {
         $this->async = $async;
+
         return $this;
     }
 
@@ -114,7 +111,7 @@ class Telegram
     {
         return $this->handleResponse($this->client->{$this->getMethod()}($name, [
             $this->typeOfRequest($arguments) => $this->getData($arguments),
-            'headers' => $this->getHeaders()
+            'headers' => $this->getHeaders(),
         ]));
     }
 
@@ -145,7 +142,7 @@ class Telegram
      */
     protected function typeOfRequest(array $arguments) : string
     {
-        if (!$arguments) {
+        if (! $arguments) {
             return 'json';
         }
 
@@ -181,7 +178,7 @@ class Telegram
         return (new Collection($data))->map(function ($key, $value) {
             return [
                 'name' => $key,
-                'value' => $value
+                'value' => $value,
             ];
         });
     }
@@ -201,6 +198,7 @@ class Telegram
     public function chatId(int $chatId): self
     {
         $this->chatId = $chatId;
+
         return $this;
     }
 
@@ -221,7 +219,7 @@ class Telegram
     }
 
     /**
-     * get base url
+     * get base url.
      *
      * @param  string  $token
      * @return string
@@ -232,7 +230,7 @@ class Telegram
     }
 
     /**
-     * get current bot name
+     * get current bot name.
      *
      * @return string
      */
@@ -242,7 +240,7 @@ class Telegram
     }
 
     /**
-     * change bot
+     * change bot.
      *
      * @param  string  $bot
      * @return string
@@ -253,7 +251,7 @@ class Telegram
 
         $this->client = new Client([
             'baseUrl' => $this->getBaseUrl(config("telegram.bots.$bot")),
-            'timeout' => $this->timeout
+            'timeout' => $this->timeout,
         ]);
     }
 
@@ -264,6 +262,7 @@ class Telegram
     public function setEventDispatcher(Dispatcher $events) : self
     {
         $this->events = $events;
+
         return $this;
     }
 
@@ -275,5 +274,4 @@ class Telegram
     {
         return $this->events->dispatch($event);
     }
-
 }

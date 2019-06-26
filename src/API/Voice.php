@@ -2,31 +2,29 @@
 
 namespace Alish\Telegram\API;
 
-class Voice extends BaseTelegram {
-
-
+class Voice extends BaseTelegram
+{
     /**
-     * @var string $file_id
+     * @var string
      * Unique identifier for this file
      */
     protected $file_id;
 
     /**
-     * @var integer $duration
+     * @var int
      * Duration of the audio in seconds as defined by sender
      */
     protected $duration;
 
     /**
-     * @var string|null $mime_type
+     * @var string|null
      * Optional. MIME type of the file as defined by sender
      */
     protected $mime_type;
 
     /**
-     * @var integer|null $file_size
+     * @var int|null
      * Optional. File size
      */
     protected $file_size;
-
 }

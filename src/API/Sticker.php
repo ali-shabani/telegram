@@ -2,55 +2,53 @@
 
 namespace Alish\Telegram\API;
 
-class Sticker extends BaseTelegram {
-
+class Sticker extends BaseTelegram
+{
     /**
-     * @var string $file_id
+     * @var string
      * Unique identifier for this file
      */
     protected $file_id;
 
     /**
-     * @var integer $width
+     * @var int
      * Sticker width
      */
     protected $width;
 
     /**
-     * @var integer $height
+     * @var int
      * Sticker height
      */
     protected $height;
 
     /**
-     * @var PhotoSize|null $thumb
+     * @var PhotoSize|null
      * Optional. Sticker thumbnail in the .webp or .jpg format
      */
     protected $thumb;
 
     /**
-     * @var string|null $emoji
+     * @var string|null
      * Optional. Emoji associated with the sticker
      */
     protected $emoji;
 
     /**
-     * @var string|null $set_name
+     * @var string|null
      * Optional. Name of the sticker set to which the sticker belongs
      */
     protected $set_name;
 
     /**
-     * @var MaskPosition|null $mask_position
+     * @var MaskPosition|null
      * Optional. For mask stickers, the position where the mask should be placed
      */
     protected $mask_position;
 
     /**
-     * @var integer|null $file_size
+     * @var int|null
      * Optional. File size
      */
     protected $file_size;
-
-
 }

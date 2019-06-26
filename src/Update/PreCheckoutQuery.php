@@ -1,16 +1,13 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 use Alish\Telegram\API\User;
 
 class PreCheckoutQuery extends Base
 {
-
     /**
-     * New incoming pre-checkout query. Contains full information about checkout
+     * New incoming pre-checkout query. Contains full information about checkout.
      *
      * @return \Alish\Telegram\API\PreCheckoutQuery
      */
@@ -20,7 +17,7 @@ class PreCheckoutQuery extends Base
     }
 
     /**
-     * User who sent the query
+     * User who sent the query.
      *
      * @return User
      */
@@ -30,7 +27,7 @@ class PreCheckoutQuery extends Base
     }
 
     /**
-     * Unique query identifier
+     * Unique query identifier.
      *
      * @return string
      */
@@ -40,7 +37,7 @@ class PreCheckoutQuery extends Base
     }
 
     /**
-     * Three-letter ISO 4217 currency code
+     * Three-letter ISO 4217 currency code.
      *
      * @return string
      */
@@ -61,7 +58,7 @@ class PreCheckoutQuery extends Base
     }
 
     /**
-     * Bot specified invoice payload
+     * Bot specified invoice payload.
      *
      * @return string
      */
@@ -69,5 +66,4 @@ class PreCheckoutQuery extends Base
     {
         return $this->preCheckoutQuery()->getInvoicePayload();
     }
-
 }

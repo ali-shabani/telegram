@@ -2,12 +2,11 @@
 
 namespace Alish\Telegram\API;
 
-class InlineKeyboardMarkup extends BaseTelegram {
-
+class InlineKeyboardMarkup extends BaseTelegram
+{
     /**
-     * @var InlineKeyboardButton[][] $inline_keyboard
+     * @var InlineKeyboardButton[][]
      * Array of button rows, each represented by an Array of InlineKeyboardButton objects
      */
     protected $inline_keyboard;
-
 }

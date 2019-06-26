@@ -2,10 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-
 class EncryptedCredentials extends BaseTelegram
 {
-
     /**
      * @var string
      * Base64-encoded encrypted JSON-serialized data with unique user's payload, data hashes and secrets required for EncryptedPassportElement decryption and authentication

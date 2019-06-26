@@ -2,24 +2,22 @@
 
 namespace Alish\Telegram\API;
 
-
 class GameHighScore extends BaseTelegram
 {
-
     /**
-     * @var integer $position
+     * @var int
      * Position in high score table for the game
      */
     protected $position;
 
     /**
-     * @var User $user
+     * @var User
      * User
      */
     protected $user;
 
     /**
-     * @var integer $score
+     * @var int
      * Score
      */
     protected $score;

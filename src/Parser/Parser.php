@@ -2,14 +2,14 @@
 
 namespace Alish\Telegram\Parser;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use ReflectionClass;
-use ReflectionException;
 use ReflectionProperty;
+use ReflectionException;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
-class Parser {
-
+class Parser
+{
     /**
      * @var string
      */
@@ -39,10 +39,9 @@ class Parser {
         $concrete = new $class;
 
         foreach ($properties as $property) {
-
             [$propertyName] = $this->getPropertyAttributes($property);
 
-            if (!$this->isInputValidFoProperty($property, $inputs)) {
+            if (! $this->isInputValidFoProperty($property, $inputs)) {
                 continue;
             }
 
@@ -64,18 +63,21 @@ class Parser {
 
         if ($this->docBlockParser->isPrimaryType($propertyType)) {
             $concrete->$propertySetter($value);
+
             return;
         }
 
         if ($this->docBlockParser->isObjectType($propertyType)) {
             $output = $this->parser($propertyType, $value);
             $concrete->$propertySetter($output);
+
             return;
         }
 
         if ($this->docBlockParser->isArrayType($propertyType)) {
             $output = $this->parseArray($propertyType, $value);
             $concrete->$propertySetter($output);
+
             return;
         }
     }
@@ -101,7 +103,7 @@ class Parser {
         return [
             $key = $property->getName(),
             $this->docBlockParser->getTypeOfProperty($property),
-            $this->docBlockParser->getSetter($key)
+            $this->docBlockParser->getSetter($key),
         ];
     }
 
@@ -122,6 +124,7 @@ class Parser {
     protected function getClassProperties(string $class)
     {
         $reflection = new ReflectionClass($class);
+
         return $reflection->getProperties();
     }
 
@@ -149,5 +152,4 @@ class Parser {
     {
         return (new self())->parser($className, $inputs);
     }
-
 }

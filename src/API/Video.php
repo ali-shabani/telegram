@@ -2,46 +2,46 @@
 
 namespace Alish\Telegram\API;
 
-class Video extends BaseTelegram {
-
+class Video extends BaseTelegram
+{
     /**
-     * @var string $file_id
+     * @var string
      * Unique identifier for this file
      */
     protected $file_id;
 
     /**
-     * @var integer $width
+     * @var int
      * Video width as defined by sender
      */
     protected $width;
 
     /**
-     * @var integer $height
+     * @var int
      * Video height as defined by sender
      */
     protected $height;
 
     /**
-     * @var integer $duration
+     * @var int
      * Duration of the video in seconds as defined by sender
      */
     protected $duration;
 
     /**
-     * @var PhotoSize|null $thumb
+     * @var PhotoSize|null
      * Optional. Video thumbnail
      */
     protected $thumb;
 
     /**
-     * @var string|null $mime_type
+     * @var string|null
      * Optional. Mime type of a file as defined by sender
      */
     protected $mime_type;
 
     /**
-     * @var integer|null $file_size
+     * @var int|null
      * Optional. File size
      */
     protected $file_size;

@@ -2,10 +2,10 @@
 
 namespace Alish\Telegram\API;
 
-class Chat extends BaseTelegram {
-
+class Chat extends BaseTelegram
+{
     /**
-     * @var integer $id
+     * @var int
      * 	Unique identifier for this chat.
      * This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it.
      * But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.
@@ -13,70 +13,69 @@ class Chat extends BaseTelegram {
     protected $id;
 
     /**
-     * @var string $type
+     * @var string
      * Type of chat, can be either “protected”, “group”, “supergroup” or “channel”
      */
     protected $type;
 
     /**
-     * @var string $title
+     * @var string
      * Title, for supergroups, channels and group chats
      */
     protected $title;
 
     /**
-     * @var string|null $username
+     * @var string|null
      * Username, for protected chats, supergroups and channels if available
      */
     protected $username;
 
     /**
-     * @var string|null $first_name
+     * @var string|null
      * First name of the other party in a protected chat
      */
     protected $first_name;
 
     /**
-     * @var string|null $last_name
+     * @var string|null
      * Last name of the other party in a protected chat
      */
     protected $last_name;
 
     /**
-     * @var boolean|null $all_members_are_administrators
+     * @var bool|null
      * True if a group has ‘All Members Are Admins’ enabled.
      */
     protected $all_members_are_administrators;
 
     /**
-     * @var ChatPhoto|null $photo
+     * @var ChatPhoto|null
      * Chat photo. Returned only in getChat.
      */
     protected $photo;
     /**
-     * @var string|null $description
+     * @var string|null
      * Description, for supergroups and channel chats. Returned only in getChat.
      */
     protected $description;
     /**
-     * @var string|null $invite_link
+     * @var string|null
      * Chat invite link, for supergroups and channel chats. Returned only in getChat.
      */
     protected $invite_link;
     /**
-     * @var Message|null $pinned_message
+     * @var Message|null
      * Pinned message, for supergroups. Returned only in getChat.
      */
     protected $pinned_message;
     /**
-     * @var string|null $sticker_set_name
+     * @var string|null
      * For supergroups, name of group sticker set. Returned only in getChat.
      */
     protected $sticker_set_name;
     /**
-     * @var boolean|null $can_set_sticker_set
+     * @var bool|null
      * True, if the bot can change the group sticker set. Returned only in getChat.
      */
     protected $can_set_sticker_set;
-
 }

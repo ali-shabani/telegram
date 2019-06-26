@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: alish
  * Date: 9/24/18
- * Time: 8:24 AM
+ * Time: 8:24 AM.
  */
 
 namespace Alish\Telegram\API;
-
 
 class EncryptedPassportElement extends BaseTelegram
 {
@@ -77,5 +76,4 @@ class EncryptedPassportElement extends BaseTelegram
      * Base64-encoded element hash for using in PassportElementErrorUnspecified
      */
     protected $hash;
-
 }

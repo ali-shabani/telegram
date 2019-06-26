@@ -2,36 +2,35 @@
 
 namespace Alish\Telegram\API;
 
-class Contact extends BaseTelegram {
-
+class Contact extends BaseTelegram
+{
     /**
-     * @var string $phone_number
+     * @var string
      * Contact's phone number
      */
     protected $phone_number;
 
     /**
-     * @var string $first_name
+     * @var string
      * Contact's first name
      */
     protected $first_name;
 
     /**
-     * @var string|null $last_name
+     * @var string|null
      * Optional. Contact's last name
      */
     protected $last_name;
 
     /**
-     * @var integer|null $user_id
+     * @var int|null
      * Optional. Contact's user identifier in Telegram
      */
     protected $user_id;
 
     /**
-     * @var string|null $vcard
+     * @var string|null
      * Additional data about the contact in the form of a vCard
      */
     protected $vcard;
-
 }

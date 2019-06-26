@@ -1,20 +1,18 @@
 <?php
 
-
 namespace Alish\Telegram\Http\Controllers;
 
-
-use Alish\Telegram\API\Message;
-use Alish\Telegram\API\MessageEntity;
-use Alish\Telegram\API\Update;
-use Alish\Telegram\Events\FailedToParseUpdateFromTelegram;
-use Alish\Telegram\Facades\Telegram;
-use Alish\Telegram\Parser\Parser;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionException;
+use Illuminate\Http\Request;
+use Alish\Telegram\API\Update;
+use Alish\Telegram\API\Message;
+use Alish\Telegram\Parser\Parser;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Collection;
+use Alish\Telegram\Facades\Telegram;
+use Alish\Telegram\API\MessageEntity;
+use Alish\Telegram\Events\FailedToParseUpdateFromTelegram;
 
 class TelegramController extends Controller
 {
@@ -24,7 +22,7 @@ class TelegramController extends Controller
     protected $getMiddlewareGroup;
 
     /**
-     * bot
+     * bot.
      *
      * @var string
      */
@@ -43,7 +41,7 @@ class TelegramController extends Controller
         $this->handle($update);
 
         return [
-            'ok' => 'true'
+            'ok' => 'true',
         ];
     }
 
@@ -69,13 +67,13 @@ class TelegramController extends Controller
      */
     protected function handleMiddleware(Update $update, ?string $middleware)
     {
-        if (!$middleware) {
+        if (! $middleware) {
             return $this->handleType($update);
         }
 
         $concrete = new $middleware;
 
-        if (!method_exists($concrete, 'handle')) {
+        if (! method_exists($concrete, 'handle')) {
             $this->respondToMiddleware($update);
         }
 
@@ -98,7 +96,7 @@ class TelegramController extends Controller
     }
 
     /**
-     * get next middleware
+     * get next middleware.
      *
      * @return string|null
      */
@@ -124,7 +122,7 @@ class TelegramController extends Controller
     {
         [$type, $handler] = $this->getTypeOfUpdate($update);
 
-        if (!$type) {
+        if (! $type) {
             return true;
         }
 
@@ -169,7 +167,7 @@ class TelegramController extends Controller
     }
 
     /**
-     * is command active
+     * is command active.
      *
      * @param  string  $type
      * @return bool
@@ -185,7 +183,6 @@ class TelegramController extends Controller
      */
     protected function handleCommand(Update $update)
     {
-
         if ($command = $this->getBotCommand($update->getMessage())) {
             $concrete = new $command($update);
 
@@ -193,8 +190,6 @@ class TelegramController extends Controller
                 return $concrete->handle();
             }
         }
-
-        return null;
     }
 
     /**
@@ -206,11 +201,10 @@ class TelegramController extends Controller
         if ($entities = $message->getEntities()) {
             if ($this->isEntityBotCommand($entities[0])) {
                 $command = substr($message->getText(), 1, $entities[0]->getLength());
+
                 return config("telegram.commands.list.$command");
             }
         }
-
-        return null;
     }
 
     /**
@@ -231,5 +225,4 @@ class TelegramController extends Controller
     {
         return $entity->getType() === $type;
     }
-
 }

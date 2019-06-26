@@ -3,11 +3,10 @@
  * Created by PhpStorm.
  * User: alish
  * Date: 9/24/18
- * Time: 9:00 AM
+ * Time: 9:00 AM.
  */
 
 namespace Alish\Telegram\API;
-
 
 use Alish\Telegram\Template\InputFile;
 
@@ -46,19 +45,19 @@ class InputMediaAnimation extends BaseTelegram
     protected $parse_mode;
 
     /**
-     * @var integer|null
+     * @var int|null
      * Animation width
      */
     protected $width;
 
     /**
-     * @var integer|null
+     * @var int|null
      * Animation height
      */
     protected $height;
 
     /**
-     * @var integer|null
+     * @var int|null
      * Animation duration
      */
     protected $duration;

@@ -2,16 +2,16 @@
 
 namespace Alish\Telegram\API;
 
-class Location extends BaseTelegram {
-
+class Location extends BaseTelegram
+{
     /**
-     * @var float $longitude
+     * @var float
      * Longitude as defined by sender
      */
     protected $longitude;
 
     /**
-     * @var float $latitude
+     * @var float
      * Latitude as defined by sender
      */
     protected $latitude;

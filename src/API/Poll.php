@@ -1,20 +1,17 @@
 <?php
 
-
 namespace Alish\Telegram\API;
-
 
 class Poll extends BaseTelegram
 {
-
     /**
-     * @var string $id
+     * @var string
      * Unique poll identifier
      */
     protected $id;
 
     /**
-     * @var string $question
+     * @var string
      * Poll question, 1-255 characters
      */
     protected $question;
@@ -26,9 +23,8 @@ class Poll extends BaseTelegram
     protected $options;
 
     /**
-     * @var boolean $is_closed
+     * @var bool
      * True, if the poll is closed
      */
     protected $is_closed;
-
 }

@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Alish\Telegram;
 
 use Alish\Telegram\Facades\Telegram;
 
 trait TelegramMethods
 {
-
     /**
      * @param  string  $text
      * @param  array  $options
@@ -18,7 +16,7 @@ trait TelegramMethods
         $data = array_merge(
             [
                 'text' => $text,
-                'parse_mode' => $this->parseMode()
+                'parse_mode' => $this->parseMode(),
             ],
             $options
         );
@@ -33,7 +31,7 @@ trait TelegramMethods
             [
                 'text' => $text,
                 'message_id' => $id,
-                'parse_mode' => $this->parseMode()
+                'parse_mode' => $this->parseMode(),
             ],
             $options
         );
@@ -54,7 +52,7 @@ trait TelegramMethods
             [
                 'photo' => $photo,
                 'caption' => $caption,
-                'parse_mode' => $this->parseMode()
+                'parse_mode' => $this->parseMode(),
             ],
             $options
         );
@@ -75,7 +73,7 @@ trait TelegramMethods
             [
                 'photo' => $video,
                 'caption' => $caption,
-                'parse_mode' => $this->parseMode()
+                'parse_mode' => $this->parseMode(),
             ],
             $options
         );
@@ -85,13 +83,12 @@ trait TelegramMethods
     }
 
     /**
-     * parseMode of text
-     * 
+     * parseMode of text.
+     *
      * @return string
      */
     public function parseMode() : string
     {
         return property_exists($this, 'parseMode') ? $this->parseMode : config('telegram.options.parse_mode', 'Markdown');
     }
-
 }

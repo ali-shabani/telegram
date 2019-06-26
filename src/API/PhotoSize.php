@@ -2,31 +2,29 @@
 
 namespace Alish\Telegram\API;
 
-class PhotoSize extends BaseTelegram {
-
-
+class PhotoSize extends BaseTelegram
+{
     /**
-     * @var string $file_id
+     * @var string
      * Unique identifier for this file
      */
     protected $file_id;
 
     /**
-     * @var integer $width
+     * @var int
      * Photo width
      */
     protected $width;
 
     /**
-     * @var integer $height
+     * @var int
      * 	Photo height
      */
     protected $height;
 
     /**
-     * @var integer|null $file_size
+     * @var int|null
      * Optional. File size
      */
     protected $file_size;
-
 }

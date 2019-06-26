@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 use Alish\Telegram\Template\InputFile;
 
 class InputMediaAudio extends BaseTelegram
@@ -40,7 +39,7 @@ class InputMediaAudio extends BaseTelegram
     protected $parse_mode;
 
     /**
-     * @var integer|null
+     * @var int|null
      * Duration of the audio in seconds
      */
     protected $duration;
@@ -56,5 +55,4 @@ class InputMediaAudio extends BaseTelegram
      * Title of the audio
      */
     protected $title;
-
 }

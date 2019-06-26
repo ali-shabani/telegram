@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 use Alish\Telegram\Template\InputFile;
 
 class InputMediaVideo extends BaseTelegram
@@ -40,25 +39,25 @@ class InputMediaVideo extends BaseTelegram
     protected $parse_mode;
 
     /**
-     * @var integer|null
+     * @var int|null
      * Video width
      */
     protected $width;
 
     /**
-     * @var integer|null
+     * @var int|null
      * Video height
      */
     protected $height;
 
     /**
-     * @var integer|null
+     * @var int|null
      * Video duration
      */
     protected $duration;
 
     /**
-     * @var boolean|null
+     * @var bool|null
      * Pass True, if the uploaded video is suitable for streaming
      */
     protected $supports_streaming;

@@ -2,56 +2,53 @@
 
 namespace Alish\Telegram\API;
 
-
 class Animation extends BaseTelegram
 {
-
     /**
-     * @var string $file_id
+     * @var string
      * Unique file identifier
      */
     protected $file_id;
 
     /**
-     * @var integer $width
+     * @var int
      * Video width as defined by sender
      */
     protected $width;
 
     /**
-     * @var integer $height
+     * @var int
      * Video height as defined by sender
      */
     protected $height;
 
     /**
-     * @var integer $duration
+     * @var int
      * Duration of the video in seconds as defined by sender
      */
     protected $duration;
 
     /**
-     * @var PhotoSize $thumb
+     * @var PhotoSize
      * Optional. Animation thumbnail as defined by sender
      */
     protected $thumb;
 
     /**
-     * @var string|null $file_name
+     * @var string|null
      * Optional. Original animation filename as defined by sender
      */
     protected $file_name;
 
     /**
-     * @var string|null $mime_type
+     * @var string|null
      * Optional. MIME type of the file as defined by sender
      */
     protected $mime_type;
 
     /**
-     * @var integer $file_size
+     * @var int
      * Optional. File size
      */
     protected $file_size;
-
 }

@@ -2,14 +2,12 @@
 
 namespace Alish\Telegram\Parser;
 
-
-use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use ReflectionProperty;
+use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
 class DocBlockParser
 {
-
     /**
      * @var array
      */
@@ -20,7 +18,7 @@ class DocBlockParser
         'double',
         'boolean',
         'bool',
-        'true'
+        'true',
     ];
 
     /**
@@ -49,7 +47,7 @@ class DocBlockParser
     {
         $types = $this->getTypes($property);
 
-        if (!$types) {
+        if (! $types) {
             return null;
         }
 
@@ -81,6 +79,7 @@ class DocBlockParser
     {
         $comment = $property->getDocComment();
         preg_match('/@var .* /', $comment, $matches);
+
         return $matches;
     }
 
@@ -90,7 +89,7 @@ class DocBlockParser
      */
     public function isArrayType(string $type): bool
     {
-        return !$this->isPrimaryType($type) && !$this->isObjectType($type);
+        return ! $this->isPrimaryType($type) && ! $this->isObjectType($type);
     }
 
     /**
@@ -108,7 +107,7 @@ class DocBlockParser
      */
     public function isObjectType(string $type): bool
     {
-        return !$this->isPrimaryType($type) && !strpos($type, '[]');
+        return ! $this->isPrimaryType($type) && ! strpos($type, '[]');
     }
 
     /**
@@ -129,8 +128,7 @@ class DocBlockParser
         $types = $this->getTypes($property);
 
         return $types->filter(function ($type) {
-                return strtolower($type) === 'null';
-            })->count() > 0;
+            return strtolower($type) === 'null';
+        })->count() > 0;
     }
-
 }

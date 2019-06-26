@@ -2,43 +2,40 @@
 
 namespace Alish\Telegram\API;
 
-
-use Alish\Telegram\Parser\ParseAble;
-
-class Audio extends BaseTelegram {
-
+class Audio extends BaseTelegram
+{
     /**
-     * @var string $file_id
+     * @var string
      * Unique identifier for this file
      */
     protected $file_id;
 
     /**
-     * @var integer $duration
+     * @var int
      * Duration of the audio in seconds as defined by sender
      */
     protected $duration;
 
     /**
-     * @var string|null $performer
+     * @var string|null
      * Optional. Performer of the audio as defined by sender or by audio tags
      */
     protected $performer;
 
     /**
-     * @var string|null $title
+     * @var string|null
      * Optional. Title of the audio as defined by sender or by audio tags
      */
     protected $title;
 
     /**
-     * @var string|null $mime_type
+     * @var string|null
      * Optional. MIME type of the file as defined by sender
      */
     protected $mime_type;
 
     /**
-     * @var integer|null $file_size
+     * @var int|null
      * Optional. File size
      */
     protected $file_size;

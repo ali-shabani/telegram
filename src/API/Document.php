@@ -2,36 +2,35 @@
 
 namespace Alish\Telegram\API;
 
-class Document extends BaseTelegram {
-
+class Document extends BaseTelegram
+{
     /**
-     * @var string $file_id
+     * @var string
      * Unique file identifier
      */
     protected $file_id;
 
     /**
-     * @var PhotoSize|null $thumb
+     * @var PhotoSize|null
      * Optional. Document thumbnail as defined by sender
      */
     protected $thumb;
 
     /**
-     * @var string|null $file_name
+     * @var string|null
      * Optional. Original filename as defined by sender
      */
     protected $file_name;
 
     /**
-     * @var string|null $mime_type
+     * @var string|null
      * Optional. MIME type of the file as defined by sender
      */
     protected $mime_type;
 
     /**
-     * @var integer|null $file_size
+     * @var int|null
      * Optional. File size
      */
     protected $file_size;
-
 }
