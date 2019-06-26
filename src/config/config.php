@@ -1,12 +1,21 @@
 <?php 
 
     return [
+        // default bot name
+        // you can define bots in bots section
+        'default' => 'main',
 
-        'defaults' => [
-            'token_bot' => '',
-            'webhook' => '',
+        // list of bots
+        // each bots should have a key as name and an array value that contains token + optional webhook
+        // if you don't define webhook for bot token used as webhook https://yourdomains.com/bot/token
+        'bots' => [
+            'main' => [
+                'token' => env('TELEGRAM_MAIN_BOT_TOKEN')
+            ]
         ],
 
+        // define your bot commands here
+        // for each command you can define 1 handler
         'commands' => [
             'active' => false,
             'list' => [
@@ -14,8 +23,8 @@
             ]
         ],
 
-
-        'handlers' => [
+        // define handlers for different type of updates that receive from telegram
+        'updates' => [
             'CallbackQuery'      => null,
             'ChannelPost'        => null,
             'ChosenInlineResult' => null,
@@ -28,14 +37,8 @@
             'ExceptionHandler'   => null
         ],
 
-        /*
-         * define ExceptionHandler if you want to handle any error occurred during telegram response parser process
-         * if you don't define any, TelegramException will throw
-         * you should handle this error if you don't want to telegram send the response again
-         */
-        'ExceptionHandler' => null,
-
-        'loaders' => [
+        // you can define middleware for operating actions on telegram update object before it pass to relevant handler
+        'middleware' => [
             
         ]
     ];

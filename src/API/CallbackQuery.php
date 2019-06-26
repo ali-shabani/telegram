@@ -12,7 +12,7 @@ class CallbackQuery extends BaseTelegram {
 
     /**
      * @var User $from
-     * Sender
+     * Telegram
      */
     protected $from;
 

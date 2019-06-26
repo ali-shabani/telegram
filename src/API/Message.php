@@ -17,7 +17,7 @@ Class Message extends BaseTelegram {
 
     /**
      * @var User|null $from
-     * Sender, empty for messages sent to channels
+     * Telegram, empty for messages sent to channels
      */
     protected $from;
 

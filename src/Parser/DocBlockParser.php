@@ -1,83 +1,136 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pyramid
- * Date: 11/15/17
- * Time: 12:22 AM
- */
 
 namespace Alish\Telegram\Parser;
 
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use ReflectionProperty;
+
 class DocBlockParser
 {
 
-    private $primaryTypes = ['string', 'integer', 'float', 'double', 'boolean', 'bool', 'true'];
+    /**
+     * @var array
+     */
+    protected $primaryTypes = [
+        'string',
+        'integer',
+        'float',
+        'double',
+        'boolean',
+        'bool',
+        'true'
+    ];
 
-    public function getSetter($key)
+    /**
+     * @param  string  $key
+     * @return string
+     */
+    public function getSetter(string $key): string
     {
-        return 'set' . studly_case($key);
+        return 'set'.Str::studly($key);
     }
 
-    public function getGetter($key)
+    /**
+     * @param  string  $key
+     * @return string
+     */
+    public function getGetter(string $key): string
     {
-        return 'get' . studly_case($key);
+        return 'get'.Str::studly($key);
     }
 
-    public function getTypes(\ReflectionProperty $property)
-    {
-        $matches = $this->getTypeMatches($property);
-        if (count($matches) < 1) {
-            return null;
-        }
-        $types = collect(explode('|', trim(str_replace('@var ', '', $matches[0]))));
-        return $types;
-    }
-
-    public function getTypeOfProperty(\ReflectionProperty $property)
+    /**
+     * @param  ReflectionProperty  $property
+     * @return string
+     */
+    public function getTypeOfProperty(ReflectionProperty $property): string
     {
         $types = $this->getTypes($property);
+
         if (!$types) {
             return null;
         }
-        $filtered = $types->filter(function ($type) {
+
+        return $types->first(function ($type) {
             return strtolower($type) !== 'null';
         });
-
-        return $filtered[0];
     }
 
-    public function getTypeMatches(\ReflectionProperty $property)
+    /**
+     * @param  ReflectionProperty  $property
+     * @return Collection
+     */
+    public function getTypes(ReflectionProperty $property): Collection
+    {
+        $matches = $this->getTypeMatches($property);
+
+        if (count($matches) < 1) {
+            return null;
+        }
+
+        return new Collection(explode('|', trim(str_replace('@var ', '', $matches[0]))));
+    }
+
+    /**
+     * @param  ReflectionProperty  $property
+     * @return array
+     */
+    public function getTypeMatches(ReflectionProperty $property): array
     {
         $comment = $property->getDocComment();
         preg_match('/@var .* /', $comment, $matches);
         return $matches;
     }
 
-    public function isPrimaryType($type) {
-        return in_array(strtolower($type), $this->primaryTypes);
-    }
-
-    public function isObjectType($type) {
-        return !$this->isPrimaryType($type) && !strpos($type, '[]');
-    }
-
-    public function isArrayType($type) {
+    /**
+     * @param  string  $type
+     * @return bool
+     */
+    public function isArrayType(string $type): bool
+    {
         return !$this->isPrimaryType($type) && !$this->isObjectType($type);
     }
 
-    public function arrayType($type)
+    /**
+     * @param  string  $type
+     * @return bool
+     */
+    public function isPrimaryType(string $type): bool
+    {
+        return in_array(strtolower($type), $this->primaryTypes);
+    }
+
+    /**
+     * @param  string  $type
+     * @return bool
+     */
+    public function isObjectType(string $type): bool
+    {
+        return !$this->isPrimaryType($type) && !strpos($type, '[]');
+    }
+
+    /**
+     * @param  string  $type
+     * @return string
+     */
+    public function arrayType(string $type): string
     {
         return preg_replace('/\[\]/', '', $type, 1);
     }
 
-    public function isNullable(\ReflectionProperty $property)
+    /**
+     * @param  ReflectionProperty  $property
+     * @return bool
+     */
+    public function isNullable(ReflectionProperty $property): bool
     {
         $types = $this->getTypes($property);
-        $filtered = $types->filter(function ($type) {
-            return strtolower($type) === 'null';
-        });
-        return count($filtered) > 0;
+
+        return $types->filter(function ($type) {
+                return strtolower($type) === 'null';
+            })->count() > 0;
     }
-    
+
 }

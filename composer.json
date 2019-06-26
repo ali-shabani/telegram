@@ -14,10 +14,7 @@
     "autoload": {
         "psr-4": {
             "Alish\\Telegram\\": "src/"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {
@@ -30,11 +27,11 @@
         }
     },
     "require": {
-        "php": "^7.0",
-        "illuminate/routing": "~5.0",
-        "illuminate/database": "~5.0",
-        "illuminate/support": "~5.0",
-        "illuminate/http": "~5.0",
+        "php": "^7.1",
+        "illuminate/database": "5.7.* || 5.8.*",
+        "illuminate/http": "5.7.* || 5.8.*",
+        "illuminate/routing": "5.7.* || 5.8.*",
+        "illuminate/support": "5.7.* || 5.8.*",
         "guzzlehttp/guzzle": "^6.3"
     }
 }

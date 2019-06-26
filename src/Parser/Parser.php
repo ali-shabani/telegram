@@ -2,67 +2,152 @@
 
 namespace Alish\Telegram\Parser;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionProperty;
+
 class Parser {
 
+    /**
+     * @var string
+     */
+    protected $namespace = "Alish\Telegram\API\\";
 
-    private $namespace = "Alish\Telegram\API\\";
-    private $docBlockParser;
+    /**
+     * @var DocBlockParser
+     */
+    protected $docBlockParser;
 
     public function __construct()
     {
         $this->docBlockParser = new DocBlockParser();
     }
 
-    public function parser($className, $inputs)
+    /**
+     * @param string $class
+     * @param array $inputs
+     * @return mixed
+     * @throws ReflectionException
+     */
+    public function parser(string $class, array $inputs)
     {
-        $className = str_start($className, $this->namespace);
-        $reflection = new \ReflectionClass($className);
-        $properties = $reflection->getProperties();
-        $instance = new $className;
+        $class = $this->reviseClass($class);
+
+        $properties = $this->getClassProperties($class);
+        $concrete = new $class;
 
         foreach ($properties as $property) {
-            $key = $property->getName();
-            $type = $this->docBlockParser->getTypeOfProperty($property);
-            $setter = $this->docBlockParser->getSetter($key);
 
-            if (!array_key_exists($key, $inputs) || !$setter || !$type) {
+            [$propertyName] = $this->getPropertyAttributes($property);
+
+            if (!$this->isInputValidFoProperty($property, $inputs)) {
                 continue;
             }
 
-            $value = $inputs[$key];
-
-            if ($this->docBlockParser->isPrimaryType($type)) {
-                $instance->$setter($value);
-            }
-            else if ($this->docBlockParser->isObjectType($type)) {
-                $output = $this->parser($type, $value);
-                $instance->$setter($output);
-            }
-            else if ($this->docBlockParser->isArrayType($type)) {
-                $output = $this->parseArray($type, $value);
-                $instance->$setter($output);
-            }
-
+            $this->setConcreteProperty($concrete, $property, $inputs[$propertyName]);
         }
 
-        return $instance;
+        return $concrete;
     }
 
-    private function parseArray($type, $value)
+    /**
+     * @param $concrete
+     * @param  ReflectionProperty  $property
+     * @param $value
+     * @throws ReflectionException
+     */
+    protected function setConcreteProperty($concrete, ReflectionProperty $property, $value)
+    {
+        [$propertyName, $propertyType, $propertySetter] = $this->getPropertyAttributes($property);
+
+        if ($this->docBlockParser->isPrimaryType($propertyType)) {
+            $concrete->$propertySetter($value);
+            return;
+        }
+
+        if ($this->docBlockParser->isObjectType($propertyType)) {
+            $output = $this->parser($propertyType, $value);
+            $concrete->$propertySetter($output);
+            return;
+        }
+
+        if ($this->docBlockParser->isArrayType($propertyType)) {
+            $output = $this->parseArray($propertyType, $value);
+            $concrete->$propertySetter($output);
+            return;
+        }
+    }
+
+    /**
+     * @param $property
+     * @param $inputs
+     * @return bool
+     */
+    protected function isInputValidFoProperty($property, $inputs)
+    {
+        [$propertyName, $propertyType, $propertySetter] = $this->getPropertyAttributes($property);
+
+        return array_key_exists($propertyName, $inputs) && $propertySetter && $propertyType;
+    }
+
+    /**
+     * @param  ReflectionProperty  $property
+     * @return array
+     */
+    protected function getPropertyAttributes(ReflectionProperty $property) : array
+    {
+        return [
+            $key = $property->getName(),
+            $this->docBlockParser->getTypeOfProperty($property),
+            $this->docBlockParser->getSetter($key)
+        ];
+    }
+
+    /**
+     * @param  string  $class
+     * @return string
+     */
+    protected function reviseClass(string $class) : string
+    {
+        return Str::start($class, $this->namespace);
+    }
+
+    /**
+     * @param  string  $class
+     * @return ReflectionProperty[]
+     * @throws ReflectionException
+     */
+    protected function getClassProperties(string $class)
+    {
+        $reflection = new ReflectionClass($class);
+        return $reflection->getProperties();
+    }
+
+    /**
+     * @param  string  $type
+     * @param  array  $value
+     * @return array
+     */
+    protected function parseArray(string $type, array $value) : array
     {
         $type = $this->docBlockParser->arrayType($type);
-        $output = [];
-        foreach ($value as $item) {
-            $output[] = $this->parser($type, $item);
-        }
 
-        return $output;
+        return (new Collection($value))->map(function ($item) use ($type) {
+            return $this->parser($type, $item);
+        })->toArray();
     }
 
-    public static function parse($className, $inputs)
+    /**
+     * @param $className
+     * @param  array  $inputs
+     * @return mixed
+     * @throws ReflectionException
+     */
+    public static function parse($className, array $inputs)
     {
-        $parser = new self();
-        return $parser->parser($className, $inputs);
+        return (new self())->parser($className, $inputs);
     }
 
 }

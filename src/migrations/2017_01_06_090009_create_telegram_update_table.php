@@ -13,10 +13,11 @@ class CreateTelegramUpdateTable extends Migration
      */
     public function up()
     {
-        Schema::create('telegram_updates', function (Blueprint $table) {
+        Schema::create(config('telegram.records.table'), function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('update_id')->unique();
             $table->jsonb('result')->nullable();
+            $table->string('bot');
             $table->timestamps();
         });
     }

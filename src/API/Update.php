@@ -71,4 +71,13 @@ class Update extends BaseTelegram {
      * Optional. New poll state. Bots receive only updates about stopped polls and polls, which are sent by the bot
      */
     protected $poll;
+
+    /**
+     * @param $name
+     * @return bool
+     */
+    public function __isset($name)
+    {
+        return !!$this->$name;
+    }
 }

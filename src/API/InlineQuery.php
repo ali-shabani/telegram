@@ -12,13 +12,13 @@ class InlineQuery extends BaseTelegram {
 
     /**
      * @var User $from
-     * Sender
+     * Telegram
      */
     protected $from;
 
     /**
      * @var Location|null $location
-     * Optional. Sender location, only for bots that request user location
+     * Optional. Telegram location, only for bots that request user location
      */
     protected $location;
 

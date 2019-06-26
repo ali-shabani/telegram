@@ -18,7 +18,7 @@ class ChosenInlineResult extends BaseTelegram {
 
     /**
      * @var Location|null $location
-     * Optional. Sender location, only for bots that require user location
+     * Optional. Telegram location, only for bots that require user location
      */
     protected $location;
 
