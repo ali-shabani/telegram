@@ -22,7 +22,7 @@
                 "Alish\\Telegram\\TelegramServiceProvider"
             ],
             "aliases": {
-                "Telegram": "Alish\\Telegram\\Facades\\TelegramFacade"
+                "Telegram": "Alish\\Telegram\\Facades\\Telegram"
             }
         }
     },
@@ -32,6 +32,8 @@
         "illuminate/http": "5.7.* || 5.8.*",
         "illuminate/routing": "5.7.* || 5.8.*",
         "illuminate/support": "5.7.* || 5.8.*",
+        "illuminate/contracts": "5.7.* || 5.8.*",
         "guzzlehttp/guzzle": "^6.3"
-    }
+    },
+    "version": "2.0.0"
 }

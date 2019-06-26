@@ -6,6 +6,7 @@ namespace Alish\Telegram;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Promise;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Collection;
 
 /**
@@ -24,6 +25,18 @@ class Telegram
     protected $client;
 
     /**
+     * client timeout to make a request
+     *
+     * @var int
+     */
+    protected $timeout = 30;
+
+    /**
+     * @var string
+     */
+    protected $bot;
+
+    /**
      * whether request should be in sync mode or not
      *
      * @var boolean
@@ -33,9 +46,16 @@ class Telegram
     /**
      * chatId
      *
-     * @var string
+     * @var int
      */
     protected $chatId;
+
+    /**
+     * event dispatcher
+     *
+     * @var Dispatcher
+     */
+    protected $events;
 
     /**
      * request headers
@@ -53,22 +73,41 @@ class Telegram
      */
     public function __construct(string $token, bool $async)
     {
+        $this->bot = $this->getBotName($token)['name'];
+
         $this->client = new Client([
-            'base_uri' => "https://api.telegram.org/bot$token/",
-            'timeout' => 30,
+            'base_uri' => $this->getBaseUrl($token),
+            'timeout' => $this->timeout,
         ]);
 
         $this->async = $async;
     }
 
     /**
+     * @param  string  $token
+     * @return array
+     */
+    protected function getBotName(string $token) : array
+    {
+        return (new Collection(config('telegram.bots')))
+            ->map(function ($bot, $name) {
+                return ['name' => $name, 'bot' => $bot];
+            })
+            ->first(function ($bot) use($token) {
+                return $bot['bot']['token'] === $token;
+            });
+    }
+
+    /**
      * set request to be async or not
      *
      * @param  bool  $async
+     * @return self
      */
-    public function async($async = true)
+    public function async($async = true) : self
     {
         $this->async = $async;
+        return $this;
     }
 
     public function __call($name, $arguments)
@@ -156,26 +195,85 @@ class Telegram
     }
 
     /**
-     * @param  string  $chatId
-     * @return string
+     * @param  int  $chatId
+     * @return self
      */
-    public function chatId(string $chatId): string
+    public function chatId(int $chatId): self
     {
         $this->chatId = $chatId;
+        return $this;
     }
 
     /**
      * @param $headers
      * @param  bool  $replace
-     * @return array
+     * @return self
      */
-    public function addHeaders(array $headers, $replace = false): array
+    public function addHeaders(array $headers, $replace = false): self
     {
         if ($replace) {
-            return $this->headers = $headers;
+            $this->headers = $headers;
+        } else {
+            $this->headers = array_merge($this->headers, $headers);
         }
 
-        return $this->headers = array_merge($this->headers, $headers);
+        return $this;
+    }
+
+    /**
+     * get base url
+     *
+     * @param  string  $token
+     * @return string
+     */
+    protected function getBaseUrl(string $token) : string
+    {
+        return "https://api.telegram.org/bot$token/";
+    }
+
+    /**
+     * get current bot name
+     *
+     * @return string
+     */
+    public function bot() : string
+    {
+        return $this->bot;
+    }
+
+    /**
+     * change bot
+     *
+     * @param  string  $bot
+     * @return string
+     */
+    public function changeBot(string $bot) : string
+    {
+        $this->bot = $bot;
+
+        $this->client = new Client([
+            'baseUrl' => $this->getBaseUrl(config("telegram.bots.$bot")),
+            'timeout' => $this->timeout
+        ]);
+    }
+
+    /**
+     * @param  Dispatcher  $events
+     * @return Telegram
+     */
+    public function setEventDispatcher(Dispatcher $events) : self
+    {
+        $this->events = $events;
+        return $this;
+    }
+
+    /**
+     * @param $event
+     * @return array|null
+     */
+    public function dispatch($event)
+    {
+        return $this->events->dispatch($event);
     }
 
 }

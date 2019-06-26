@@ -43,9 +43,9 @@ class DocBlockParser
 
     /**
      * @param  ReflectionProperty  $property
-     * @return string
+     * @return string|null
      */
-    public function getTypeOfProperty(ReflectionProperty $property): string
+    public function getTypeOfProperty(ReflectionProperty $property): ?string
     {
         $types = $this->getTypes($property);
 
@@ -60,9 +60,9 @@ class DocBlockParser
 
     /**
      * @param  ReflectionProperty  $property
-     * @return Collection
+     * @return Collection|null
      */
-    public function getTypes(ReflectionProperty $property): Collection
+    public function getTypes(ReflectionProperty $property): ?Collection
     {
         $matches = $this->getTypeMatches($property);
 

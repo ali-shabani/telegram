@@ -7,6 +7,8 @@ namespace Alish\Telegram\Http\Controllers;
 use Alish\Telegram\API\Message;
 use Alish\Telegram\API\MessageEntity;
 use Alish\Telegram\API\Update;
+use Alish\Telegram\Events\FailedToParseUpdateFromTelegram;
+use Alish\Telegram\Facades\Telegram;
 use Alish\Telegram\Parser\Parser;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -31,14 +33,18 @@ class TelegramController extends Controller
     /**
      * @param  string  $bot
      * @param  Request  $request
-     * @return bool
+     * @return array
      * @throws ReflectionException
      */
     public function __invoke(string $bot, Request $request)
     {
         $this->bot = $bot;
         $update = $this->parseRequestToObject($request);
-        return $this->handle($update);
+        $this->handle($update);
+
+        return [
+            'ok' => 'true'
+        ];
     }
 
     /**
@@ -61,8 +67,12 @@ class TelegramController extends Controller
      * @param  string  $middleware
      * @return mixed
      */
-    protected function handleMiddleware(Update $update, string $middleware)
+    protected function handleMiddleware(Update $update, ?string $middleware)
     {
+        if (!$middleware) {
+            return $this->handleType($update);
+        }
+
         $concrete = new $middleware;
 
         if (!method_exists($concrete, 'handle')) {
@@ -140,7 +150,11 @@ class TelegramController extends Controller
         try {
             $reflection = new ReflectionClass($update);
 
-            $properties = array_diff($reflection->getProperties(), ['update_id']);
+            $properties = (new Collection($reflection->getProperties()))->map(function (\ReflectionProperty $property) {
+                return $property->getName();
+            })->toArray();
+
+            $properties = array_diff($properties, ['update_id']);
 
             foreach ($properties as $property) {
                 if (isset($update->$property)) {
@@ -148,9 +162,8 @@ class TelegramController extends Controller
                 }
             }
         } catch (ReflectionException $exception) {
-            // fire an event
+            Telegram::dispatch(new FailedToParseUpdateFromTelegram($exception));
         }
-
 
         return null;
     }

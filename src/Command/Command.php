@@ -34,7 +34,7 @@ class Command
      *
      * @return Message
      */
-    protected function message()
+    protected function message() : Message
     {
         return $this->update->getMessage();
     }
@@ -43,9 +43,9 @@ class Command
      * Unique identifier for this chat. This number may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it.
      * But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.
      *
-     * @return string
+     * @return integer
      */
-    protected function chatId()
+    protected function chatId() : int
     {
         return $this->message()->getChat()->getId();
     }
@@ -55,7 +55,7 @@ class Command
      *
      * @return User
      */
-    protected function user()
+    protected function user() : User
     {
         return $this->message()->getFrom();
     }

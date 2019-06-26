@@ -3,6 +3,7 @@
 namespace Alish\Telegram;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 
 class TelegramServiceProvider extends ServiceProvider
 {
@@ -43,7 +44,15 @@ class TelegramServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('Telegram', function ($app) {
-            return new Telegram($this->getDefaultToken(), $this->shouldAsync());
+            $telegram = new Telegram($this->getDefaultToken(), $this->shouldAsync());
+
+            if ($app->bound(DispatcherContract::class)) {
+                $telegram->setEventDispatcher(
+                    $this->app[DispatcherContract::class]
+                );
+            }
+
+            return $telegram;
         });
     }
 

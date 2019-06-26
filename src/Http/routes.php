@@ -6,7 +6,7 @@ $webhooks = collect(config('telegram.bots'))
     })->implode('|');
 
 
-Route::post('bot/{$webhook}', 'Alish\Telegram\Http\Controllers\UpdateController')
+Route::post('bot/{webhook}', 'Alish\Telegram\Http\Controllers\TelegramController')
     ->where([
         'webhook' => $webhooks
     ]);
