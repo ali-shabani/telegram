@@ -56,12 +56,20 @@ class TelegramServiceProvider extends ServiceProvider
         });
     }
 
-    public function provides()
+    /**
+     * list of providers
+     *
+     * @return string[]
+     */
+    public function provides() : array
     {
-        return array('Telegram');
+        return ['Telegram'];
     }
 
-    protected function getDefaultToken()
+    /**
+     * @return string|null
+     */
+    protected function getDefaultToken() : ?string
     {
         $default = config('telegram.default');
 
@@ -72,7 +80,10 @@ class TelegramServiceProvider extends ServiceProvider
         return config("telegram.bots")[0]['token'];
     }
 
-    protected function shouldAsync()
+    /**
+     * @return bool
+     */
+    protected function shouldAsync() : bool
     {
         return config("telegram.async", false);
     }
