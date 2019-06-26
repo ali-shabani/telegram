@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Alish\Telegram;
 
 use GuzzleHttp\Client;
@@ -9,62 +8,60 @@ use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Collection;
 
 /**
- * Class Telegram
- * @package Alish\Telegram\Http
- *
+ * Class Telegram.
  */
 class Telegram
 {
-
     /**
-     * client for sending requests
+     * client for sending requests.
      *
      * @var Client
      */
     protected $client;
 
     /**
-     * whether request should be in sync mode or not
+     * whether request should be in sync mode or not.
      *
-     * @var boolean
+     * @var bool
      */
     protected $async;
 
     /**
-     * chatId
+     * chatId.
      *
      * @var string
      */
     protected $chatId;
 
     /**
-     * request headers
+     * request headers.
      *
      * @var array
      */
     protected $headers = [
-        'Accept' => 'application/json'
+        'Accept' => 'application/json',
     ];
 
     /**
      * Telegram constructor.
-     * @param  string|null  $token
-     * @param  boolean  $async
+     *
+     * @param string|null $token
+     * @param bool        $async
      */
     public function __construct(string $token, bool $async)
     {
         $this->client = new Client([
             'base_uri' => "https://api.telegram.org/bot$token/",
-            'timeout' => 30,
+            'timeout'  => 30,
         ]);
 
         $this->async = $async;
     }
 
     /**
-     * set request to be async or not
+     * set request to be async or not.
      *
-     * @param  bool  $async
+     * @param bool $async
      */
     public function async($async = true)
     {
@@ -75,12 +72,13 @@ class Telegram
     {
         return $this->handleResponse($this->client->{$this->getMethod()}($name, [
             $this->typeOfRequest($arguments) => $this->getData($arguments),
-            'headers' => $this->getHeaders()
+            'headers'                        => $this->getHeaders(),
         ]));
     }
 
     /**
-     * @param  Response|Promise  $response
+     * @param Response|Promise $response
+     *
      * @return Promise|array
      */
     protected function handleResponse($response)
@@ -101,7 +99,8 @@ class Telegram
     }
 
     /**
-     * @param  array  $arguments
+     * @param array $arguments
+     *
      * @return string
      */
     protected function typeOfRequest(array $arguments) : string
@@ -120,7 +119,8 @@ class Telegram
     }
 
     /**
-     * @param  array  $arguments
+     * @param array $arguments
+     *
      * @return array|mixed
      */
     protected function getData(array $arguments): array
@@ -141,8 +141,8 @@ class Telegram
 
         return (new Collection($data))->map(function ($key, $value) {
             return [
-                'name' => $key,
-                'value' => $value
+                'name'  => $key,
+                'value' => $value,
             ];
         });
     }
@@ -156,7 +156,8 @@ class Telegram
     }
 
     /**
-     * @param  string  $chatId
+     * @param string $chatId
+     *
      * @return string
      */
     public function chatId(string $chatId): string
@@ -166,7 +167,8 @@ class Telegram
 
     /**
      * @param $headers
-     * @param  bool  $replace
+     * @param bool $replace
+     *
      * @return array
      */
     public function addHeaders(array $headers, $replace = false): array
@@ -177,5 +179,4 @@ class Telegram
 
         return $this->headers = array_merge($this->headers, $headers);
     }
-
 }

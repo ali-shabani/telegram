@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Alish\Telegram\Http\Controllers;
-
 
 use Alish\Telegram\API\Message;
 use Alish\Telegram\API\MessageEntity;
@@ -22,29 +20,34 @@ class TelegramController extends Controller
     protected $getMiddlewareGroup;
 
     /**
-     * bot
+     * bot.
      *
      * @var string
      */
     protected $bot;
 
     /**
-     * @param  string  $bot
-     * @param  Request  $request
-     * @return bool
+     * @param string  $bot
+     * @param Request $request
+     *
      * @throws ReflectionException
+     *
+     * @return bool
      */
     public function __invoke(string $bot, Request $request)
     {
         $this->bot = $bot;
         $update = $this->parseRequestToObject($request);
+
         return $this->handle($update);
     }
 
     /**
-     * @param  Request  $request
-     * @return Update
+     * @param Request $request
+     *
      * @throws ReflectionException
+     *
+     * @return Update
      */
     protected function parseRequestToObject(Request $request)
     {
@@ -57,13 +60,14 @@ class TelegramController extends Controller
     }
 
     /**
-     * @param  Update  $update
-     * @param  string  $middleware
+     * @param Update $update
+     * @param string $middleware
+     *
      * @return mixed
      */
     protected function handleMiddleware(Update $update, string $middleware)
     {
-        $concrete = new $middleware;
+        $concrete = new $middleware();
 
         if (!method_exists($concrete, 'handle')) {
             $this->respondToMiddleware($update);
@@ -75,7 +79,8 @@ class TelegramController extends Controller
     }
 
     /**
-     * @param  Update  $update
+     * @param Update $update
+     *
      * @return bool|mixed|null
      */
     protected function respondToMiddleware(Update $update)
@@ -88,7 +93,7 @@ class TelegramController extends Controller
     }
 
     /**
-     * get next middleware
+     * get next middleware.
      *
      * @return string|null
      */
@@ -107,7 +112,8 @@ class TelegramController extends Controller
     }
 
     /**
-     * @param  Update  $update
+     * @param Update $update
+     *
      * @return bool|null
      */
     protected function handleType(Update $update)
@@ -132,7 +138,8 @@ class TelegramController extends Controller
     }
 
     /**
-     * @param  Update  $update
+     * @param Update $update
+     *
      * @return array|null
      */
     protected function getTypeOfUpdate(Update $update): ?array
@@ -151,14 +158,14 @@ class TelegramController extends Controller
             // fire an event
         }
 
-
         return null;
     }
 
     /**
-     * is command active
+     * is command active.
      *
-     * @param  string  $type
+     * @param string $type
+     *
      * @return bool
      */
     protected function isCommandActive(string $type): bool
@@ -167,12 +174,12 @@ class TelegramController extends Controller
     }
 
     /**
-     * @param  Update  $update
+     * @param Update $update
+     *
      * @return bool|null
      */
     protected function handleCommand(Update $update)
     {
-
         if ($command = $this->getBotCommand($update->getMessage())) {
             $concrete = new $command($update);
 
@@ -180,12 +187,11 @@ class TelegramController extends Controller
                 return $concrete->handle();
             }
         }
-
-        return null;
     }
 
     /**
-     * @param  Message  $message
+     * @param Message $message
+     *
      * @return string|null
      */
     protected function getBotCommand(Message $message)
@@ -193,15 +199,15 @@ class TelegramController extends Controller
         if ($entities = $message->getEntities()) {
             if ($this->isEntityBotCommand($entities[0])) {
                 $command = substr($message->getText(), 1, $entities[0]->getLength());
+
                 return config("telegram.commands.list.$command");
             }
         }
-
-        return null;
     }
 
     /**
-     * @param  MessageEntity  $entity
+     * @param MessageEntity $entity
+     *
      * @return bool
      */
     protected function isEntityBotCommand(MessageEntity $entity)
@@ -210,13 +216,13 @@ class TelegramController extends Controller
     }
 
     /**
-     * @param  MessageEntity  $entity
-     * @param  string  $type
+     * @param MessageEntity $entity
+     * @param string        $type
+     *
      * @return bool
      */
     protected function entityIs(MessageEntity $entity, string $type): bool
     {
         return $entity->getType() === $type;
     }
-
 }

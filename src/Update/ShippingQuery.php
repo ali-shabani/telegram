@@ -1,15 +1,12 @@
 <?php
 
-
 namespace Alish\Telegram\Update;
-
 
 use Alish\Telegram\API\ShippingAddress;
 use Alish\Telegram\API\User;
 
 class ShippingQuery extends Base
 {
-
     /**
      * @return \Alish\Telegram\API\ShippingQuery
      */
@@ -19,7 +16,7 @@ class ShippingQuery extends Base
     }
 
     /**
-     * Unique query identifier
+     * Unique query identifier.
      *
      * @return string
      */
@@ -29,7 +26,7 @@ class ShippingQuery extends Base
     }
 
     /**
-     * User who sent the query
+     * User who sent the query.
      *
      * @return User
      */
@@ -39,7 +36,7 @@ class ShippingQuery extends Base
     }
 
     /**
-     * 	Bot specified invoice payload
+     * 	Bot specified invoice payload.
      *
      * @return string
      */
@@ -49,7 +46,7 @@ class ShippingQuery extends Base
     }
 
     /**
-     * User specified shipping address
+     * User specified shipping address.
      *
      * @return ShippingAddress
      */
@@ -57,5 +54,4 @@ class ShippingQuery extends Base
     {
         return $this->shippingQuery()->getShippingAddress();
     }
-
 }
