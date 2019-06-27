@@ -125,6 +125,17 @@ class Telegram
     protected function handleResponse($response)
     {
         if ($response instanceof Promise) {
+
+            $response->then(
+                function (ResponseInterface $res) {
+                    dump($res->getStatusCode() . "\n");
+                },
+                function (RequestException $e) {
+                    dump($e->getMessage()."\n");
+                    dump($e->getRequest()->getMethod());
+
+                });
+
             return $response;
         }
 
@@ -136,7 +147,9 @@ class Telegram
      */
     protected function getMethod(): string
     {
-        return $this->async ? 'postAsync' : 'post';
+//        return $this->async ? 'postAsync' : 'post';
+        // we should find better async solution
+        return 'post';
     }
 
     /**
@@ -178,12 +191,12 @@ class Telegram
             return $data;
         }
 
-        return (new Collection($data))->map(function ($key, $value) {
+        return (new Collection($data))->map(function ($value, $key) {
             return [
                 'name' => $key,
-                'value' => $value
+                'contents' => $value
             ];
-        });
+        })->ToArray();
     }
 
     /**
