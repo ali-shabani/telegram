@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Voice extends BaseTelegram {
+class Voice extends BaseTelegram
+{
 
 
     /**
@@ -28,5 +29,4 @@ class Voice extends BaseTelegram {
      * Optional. File size
      */
     protected $file_size;
-
 }

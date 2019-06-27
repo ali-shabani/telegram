@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class Poll extends BaseTelegram
 {
 
@@ -30,5 +29,4 @@ class Poll extends BaseTelegram
      * True, if the poll is closed
      */
     protected $is_closed;
-
 }

@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class KeyboardButton extends BaseTelegram {
+class KeyboardButton extends BaseTelegram
+{
 
     /**
      * @var string|null $text
@@ -21,5 +22,4 @@ class KeyboardButton extends BaseTelegram {
      * Optional. If True, the user's current location will be sent when the button is pressed. Available in protected chats only
      */
     protected $request_location;
-
 }

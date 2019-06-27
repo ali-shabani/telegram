@@ -8,8 +8,8 @@
 
 namespace Alish\Telegram\API;
 
-
-class PreCheckoutQuery extends BaseTelegram {
+class PreCheckoutQuery extends BaseTelegram
+{
 
     /**
      * @var string $id

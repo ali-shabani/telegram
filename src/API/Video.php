@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Video extends BaseTelegram {
+class Video extends BaseTelegram
+{
 
     /**
      * @var string $file_id

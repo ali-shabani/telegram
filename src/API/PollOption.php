@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class PollOption extends BaseTelegram
 {
 
@@ -18,5 +17,4 @@ class PollOption extends BaseTelegram
      * Number of users that voted for this option
      */
     protected $voter_count;
-
 }

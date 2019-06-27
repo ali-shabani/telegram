@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class LabeledPrice extends BaseTelegram
 {
 
@@ -18,5 +17,4 @@ class LabeledPrice extends BaseTelegram
      * See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
      */
     protected $amount;
-
 }

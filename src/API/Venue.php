@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Venue extends BaseTelegram {
+class Venue extends BaseTelegram
+{
 
     /**
      * @var Location $location
@@ -33,5 +34,4 @@ class Venue extends BaseTelegram {
      * Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
      */
     protected $foursquare_type;
-
 }

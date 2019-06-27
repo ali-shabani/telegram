@@ -8,8 +8,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class CallbackGame
 {
-
 }

@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class UserProfilePhotos extends BaseTelegram {
+class UserProfilePhotos extends BaseTelegram
+{
 
     /**
      * @var integer $total_count
@@ -15,5 +16,4 @@ class UserProfilePhotos extends BaseTelegram {
      * Requested profile pictures (in up to 4 sizes each)
      */
     protected $photos;
-
 }

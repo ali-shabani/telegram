@@ -86,12 +86,11 @@ trait TelegramMethods
 
     /**
      * parseMode of text
-     * 
+     *
      * @return string
      */
     public function parseMode() : string
     {
         return property_exists($this, 'parseMode') ? $this->parseMode : config('telegram.options.parse_mode', 'Markdown');
     }
-
 }

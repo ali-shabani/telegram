@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class ForceReply extends BaseTelegram {
+class ForceReply extends BaseTelegram
+{
 
     /**
      * @var true $force_reply

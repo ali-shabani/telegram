@@ -8,7 +8,6 @@
 
 namespace Alish\Telegram\API;
 
-
 use Alish\Telegram\Template\InputFile;
 
 class InputMediaAnimation extends BaseTelegram

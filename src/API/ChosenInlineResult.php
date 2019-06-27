@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class ChosenInlineResult extends BaseTelegram {
+class ChosenInlineResult extends BaseTelegram
+{
 
     /**
      * @var string $result_id
@@ -34,5 +35,4 @@ class ChosenInlineResult extends BaseTelegram {
      * The query that was used to obtain the result
      */
     protected $query;
-
 }

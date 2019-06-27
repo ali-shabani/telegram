@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class ReplyKeyboardRemove extends BaseTelegram {
+class ReplyKeyboardRemove extends BaseTelegram
+{
     /**
      * @var true $remove_keyboard
      * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard;
@@ -19,5 +20,4 @@ class ReplyKeyboardRemove extends BaseTelegram {
      * while still showing the keyboard with poll options to users who haven't voted yet.
      */
     protected $selective;
-
 }

@@ -2,8 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-
-class WebhookInfo extends BaseTelegram {
+class WebhookInfo extends BaseTelegram
+{
 
     /**
      * @var string $url
@@ -46,5 +46,4 @@ class WebhookInfo extends BaseTelegram {
      * Optional. A list of update types the bot is subscribed to. Defaults to all update types
      */
     protected $allowed_updates;
-
 }

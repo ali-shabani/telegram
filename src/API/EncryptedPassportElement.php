@@ -8,7 +8,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class EncryptedPassportElement extends BaseTelegram
 {
     /**
@@ -77,5 +76,4 @@ class EncryptedPassportElement extends BaseTelegram
      * Base64-encoded element hash for using in PassportElementErrorUnspecified
      */
     protected $hash;
-
 }

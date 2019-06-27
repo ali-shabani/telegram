@@ -8,8 +8,8 @@
 
 namespace Alish\Telegram\API;
 
-
-class ShippingQuery extends BaseTelegram {
+class ShippingQuery extends BaseTelegram
+{
 
     /**
      * @var string $id
@@ -34,5 +34,4 @@ class ShippingQuery extends BaseTelegram {
      * User specified shipping address
      */
     protected $shipping_address;
-
 }

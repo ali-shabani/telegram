@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\Parser;
 
-
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use ReflectionProperty;
@@ -129,8 +128,7 @@ class DocBlockParser
         $types = $this->getTypes($property);
 
         return $types->filter(function ($type) {
-                return strtolower($type) === 'null';
-            })->count() > 0;
+            return strtolower($type) === 'null';
+        })->count() > 0;
     }
-
 }

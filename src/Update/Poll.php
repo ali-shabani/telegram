@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\PollOption;
 
 class Poll extends Base
@@ -58,5 +57,4 @@ class Poll extends Base
     {
         return $this->poll()->getIsClosed();
     }
-
 }

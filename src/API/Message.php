@@ -7,7 +7,8 @@ namespace Alish\Telegram\API;
  * @package Alish\Telegram\API
  *
  */
-Class Message extends BaseTelegram {
+class Message extends BaseTelegram
+{
 
     /**
      * @var integer $message_id
@@ -286,5 +287,4 @@ Class Message extends BaseTelegram {
      * Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
      */
     protected $reply_markup;
-
 }

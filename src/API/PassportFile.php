@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class PassportFile extends BaseTelegram
 {
 
@@ -23,5 +22,4 @@ class PassportFile extends BaseTelegram
      * Unix time when the file was uploaded
      */
     protected $file_date;
-
 }

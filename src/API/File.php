@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class File extends BaseTelegram {
+class File extends BaseTelegram
+{
 
     /**
      * @var string $file_id
@@ -21,5 +22,4 @@ class File extends BaseTelegram {
      * Optional. File path. Use https://api.telegram.org/file/bot<token>/<file_path> to get the file.
      */
     protected $file_path;
-
 }

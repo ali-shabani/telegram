@@ -8,7 +8,8 @@ use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
 
-class Parser {
+class Parser
+{
 
     /**
      * @var string
@@ -39,7 +40,6 @@ class Parser {
         $concrete = new $class;
 
         foreach ($properties as $property) {
-
             [$propertyName] = $this->getPropertyAttributes($property);
 
             if (!$this->isInputValidFoProperty($property, $inputs)) {
@@ -149,5 +149,4 @@ class Parser {
     {
         return (new self())->parser($className, $inputs);
     }
-
 }

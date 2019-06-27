@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Chat extends BaseTelegram {
+class Chat extends BaseTelegram
+{
 
     /**
      * @var integer $id
@@ -78,5 +79,4 @@ class Chat extends BaseTelegram {
      * True, if the bot can change the group sticker set. Returned only in getChat.
      */
     protected $can_set_sticker_set;
-
 }

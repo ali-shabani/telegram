@@ -3,14 +3,12 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\Chat;
 use Alish\Telegram\API\User;
 use Alish\Telegram\TelegramMethods;
 
 class CallbackQuery extends Base
 {
-
     use TelegramMethods;
 
     /**
@@ -69,5 +67,4 @@ class CallbackQuery extends Base
     {
         return $this->chat()->getId();
     }
-
 }

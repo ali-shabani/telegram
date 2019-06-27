@@ -93,7 +93,7 @@ class Telegram
             ->map(function ($bot, $name) {
                 return ['name' => $name, 'bot' => $bot];
             })
-            ->first(function ($bot) use($token) {
+            ->first(function ($bot) use ($token) {
                 return $bot['bot']['token'] === $token;
             });
     }
@@ -275,5 +275,4 @@ class Telegram
     {
         return $this->events->dispatch($event);
     }
-
 }

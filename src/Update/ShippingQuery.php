@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\ShippingAddress;
 use Alish\Telegram\API\User;
 
@@ -57,5 +56,4 @@ class ShippingQuery extends Base
     {
         return $this->shippingQuery()->getShippingAddress();
     }
-
 }

@@ -8,8 +8,8 @@
 
 namespace Alish\Telegram\API;
 
-
-class SuccessfulPayment extends BaseTelegram {
+class SuccessfulPayment extends BaseTelegram
+{
 
     /**
      * @var string $currency
@@ -53,5 +53,4 @@ class SuccessfulPayment extends BaseTelegram {
      * Provider payment identifier
      */
     protected $provider_payment_charge_id;
-
 }

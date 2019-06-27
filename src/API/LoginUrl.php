@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class LoginUrl extends BaseTelegram
 {
     /**
@@ -35,5 +34,4 @@ class LoginUrl extends BaseTelegram
      * Optional. Pass True to request the permission for your bot to send messages to the user.
      */
     protected $request_write_access;
-
 }
