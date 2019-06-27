@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 class ForceReply extends Button
 {
 
@@ -31,5 +30,4 @@ class ForceReply extends Button
         $this->button['selective'] = $selective;
         return $this;
     }
-
 }
