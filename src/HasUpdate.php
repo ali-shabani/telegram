@@ -65,12 +65,15 @@ trait HasUpdate
     }
 
     /**
-     * @return mixed
+     * @return mixed|null
      */
     public function updateObject()
     {
-        $method = 'get' . Str::studly($this->updateType());
-        return $this->update->$method();
+        if ($method = 'get' . Str::studly($this->updateType())) {
+            return $this->update->$method();
+        }
+
+        return null;
     }
 
     /**
@@ -78,7 +81,9 @@ trait HasUpdate
      */
     public function user() : ?User
     {
-        $object = $this->updateObject();
-        return $object->getFrom();
+        if ($object = $this->updateObject()) {
+            return $object->getFrom();
+        }
+        return null;
     }
 }
