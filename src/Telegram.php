@@ -125,7 +125,6 @@ class Telegram
     protected function handleResponse($response)
     {
         if ($response instanceof Promise) {
-
             $response->then(
                 function (ResponseInterface $res) {
                     dump($res->getStatusCode() . "\n");
@@ -133,7 +132,6 @@ class Telegram
                 function (RequestException $e) {
                     dump($e->getMessage()."\n");
                     dump($e->getRequest()->getMethod());
-
                 });
 
             return $response;
