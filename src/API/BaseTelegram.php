@@ -2,15 +2,17 @@
 
 namespace Alish\Telegram\API;
 
+use Illuminate\Support\Str;
+
 class BaseTelegram
 {
     public function __call($name, $arguments)
     {
-        if (starts_with($name, 'get')) {
-            $property = snake_case(preg_replace('/get/', '', $name, 1));
+        if (Str::startsWith($name, 'get')) {
+            $property = Str::snake(preg_replace('/get/', '', $name, 1));
             return $this->$property;
-        } elseif (starts_with($name, 'set')) {
-            $property = snake_case(preg_replace('/set/', '', $name, 1));
+        } elseif (Str::startsWith($name, 'set')) {
+            $property = Str::snake(preg_replace('/set/', '', $name, 1));
             $this->$property = $arguments[0];
             return $this;
         }
