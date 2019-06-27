@@ -24,7 +24,7 @@ trait HasUpdate
      * @param  Update|null  $update
      * @return $this|Update
      */
-    public function update(?Update $update)
+    public function update(?Update $update = null)
     {
         if ($update) {
             $this->update = $update;
