@@ -76,12 +76,8 @@ class TelegramController extends Controller
 
         $concrete = new $middleware;
 
-        if (!method_exists($concrete, 'handle')) {
-            $this->respondToMiddleware($update);
-        }
-
         return $concrete->handle($update, function (Update $update) {
-            return $this->respondToMiddleware($update);
+            return $this->handleMiddleware($update, $this->nextMiddleware());
         });
     }
 
@@ -91,11 +87,7 @@ class TelegramController extends Controller
      */
     protected function respondToMiddleware(Update $update)
     {
-        if ($middleware = $this->nextMiddleware()) {
-            return $this->handleMiddleware($update, $middleware);
-        }
-
-        return $this->handleType($update);
+        return $this->handleMiddleware($update, $this->nextMiddleware());
     }
 
     /**
