@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\User;
 
 class ChosenInlineResult extends Base
@@ -49,5 +48,4 @@ class ChosenInlineResult extends Base
     {
         return $this->chosenInlineResult()->getQuery();
     }
-
 }

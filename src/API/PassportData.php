@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class PassportData extends BaseTelegram
 {
 
@@ -17,5 +16,4 @@ class PassportData extends BaseTelegram
      * Encrypted credentials required to decrypt the data
      */
     protected $credential;
-
 }

@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class EncryptedCredentials extends BaseTelegram
 {
 

@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Http\Controllers;
 
-
 use Alish\Telegram\API\Message;
 use Alish\Telegram\API\MessageEntity;
 use Alish\Telegram\API\Update;
@@ -185,7 +184,6 @@ class TelegramController extends Controller
      */
     protected function handleCommand(Update $update)
     {
-
         if ($command = $this->getBotCommand($update->getMessage())) {
             $concrete = new $command($update);
 
@@ -231,5 +229,4 @@ class TelegramController extends Controller
     {
         return $entity->getType() === $type;
     }
-
 }

@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Document extends BaseTelegram {
+class Document extends BaseTelegram
+{
 
     /**
      * @var string $file_id
@@ -33,5 +34,4 @@ class Document extends BaseTelegram {
      * Optional. File size
      */
     protected $file_size;
-
 }

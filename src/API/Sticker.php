@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Sticker extends BaseTelegram {
+class Sticker extends BaseTelegram
+{
 
     /**
      * @var string $file_id
@@ -51,6 +52,4 @@ class Sticker extends BaseTelegram {
      * Optional. File size
      */
     protected $file_size;
-
-
 }

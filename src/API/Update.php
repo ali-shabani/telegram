@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Update extends BaseTelegram {
+class Update extends BaseTelegram
+{
 
     /**
      * @var integer $update_id

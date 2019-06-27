@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\Chat;
 use Alish\Telegram\TelegramMethods;
 
@@ -55,5 +54,4 @@ class Message extends Base
 
         return $this->sendMessage($text, $options);
     }
-
 }

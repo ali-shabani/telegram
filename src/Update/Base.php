@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\Update;
 
 class Base
@@ -21,5 +20,4 @@ class Base
     {
         $this->update = $update;
     }
-
 }

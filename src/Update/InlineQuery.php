@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\User;
 
 class InlineQuery extends Base
@@ -48,5 +47,4 @@ class InlineQuery extends Base
     {
         return $this->inlineQuery()->getOffset();
     }
-
 }

@@ -8,7 +8,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class StickerSet extends BaseTelegram
 {
 
@@ -35,5 +34,4 @@ class StickerSet extends BaseTelegram
      * List of all set stickers
      */
     protected $stickers;
-
 }

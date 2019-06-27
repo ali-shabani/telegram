@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class ReplyKeyboardMarkup extends BaseTelegram {
+class ReplyKeyboardMarkup extends BaseTelegram
+{
 
     /**
      * @var KeyboardButton[][] $keyboard
@@ -34,5 +35,4 @@ class ReplyKeyboardMarkup extends BaseTelegram {
      * Other users in the group don’t see the keyboard.
      */
     protected $selective;
-
 }

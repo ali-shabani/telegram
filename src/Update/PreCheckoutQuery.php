@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 use Alish\Telegram\API\User;
 
 class PreCheckoutQuery extends Base
@@ -69,5 +68,4 @@ class PreCheckoutQuery extends Base
     {
         return $this->preCheckoutQuery()->getInvoicePayload();
     }
-
 }

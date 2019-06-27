@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class InlineKeyboardButton extends BaseTelegram {
+class InlineKeyboardButton extends BaseTelegram
+{
 
     /**
      * @var string $text

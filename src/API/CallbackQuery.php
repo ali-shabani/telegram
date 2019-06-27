@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class CallbackQuery extends BaseTelegram {
+class CallbackQuery extends BaseTelegram
+{
 
     /**
      * @var string $id

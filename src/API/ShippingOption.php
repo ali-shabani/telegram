@@ -8,7 +8,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class ShippingOption extends BaseTelegram
 {
 
@@ -29,5 +28,4 @@ class ShippingOption extends BaseTelegram
      * List of price portions
      */
     protected $prices;
-
 }

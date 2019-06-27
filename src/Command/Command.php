@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Command;
 
-
 use Alish\Telegram\API\Message;
 use Alish\Telegram\API\Update;
 use Alish\Telegram\API\User;
@@ -59,5 +58,4 @@ class Command
     {
         return $this->message()->getFrom();
     }
-
 }

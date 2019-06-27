@@ -2,8 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-
-class User extends BaseTelegram {
+class User extends BaseTelegram
+{
 
     /**
      * @var integer $id
@@ -40,5 +40,4 @@ class User extends BaseTelegram {
      * IETF language tag of the user's language
      */
     protected $language_code;
-
 }

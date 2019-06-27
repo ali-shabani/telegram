@@ -2,10 +2,10 @@
 
 namespace Alish\Telegram\API;
 
-
 use Alish\Telegram\Parser\ParseAble;
 
-class Audio extends BaseTelegram {
+class Audio extends BaseTelegram
+{
 
     /**
      * @var string $file_id

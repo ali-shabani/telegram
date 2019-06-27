@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 class Animation extends BaseTelegram
 {
 
@@ -53,5 +52,4 @@ class Animation extends BaseTelegram
      * Optional. File size
      */
     protected $file_size;
-
 }

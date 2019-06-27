@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class Contact extends BaseTelegram {
+class Contact extends BaseTelegram
+{
 
     /**
      * @var string $phone_number
@@ -33,5 +34,4 @@ class Contact extends BaseTelegram {
      * Additional data about the contact in the form of a vCard
      */
     protected $vcard;
-
 }

@@ -2,8 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-
-class MessageEntity extends BaseTelegram {
+class MessageEntity extends BaseTelegram
+{
 
 
     /**
@@ -37,5 +37,4 @@ class MessageEntity extends BaseTelegram {
      * Optional. For “text_mention” only, the mentioned user
      */
     protected $user;
-
 }

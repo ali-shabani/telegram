@@ -2,7 +2,6 @@
 
 namespace Alish\Telegram\API;
 
-
 use Alish\Telegram\Template\InputFile;
 
 class InputMediaVideo extends BaseTelegram

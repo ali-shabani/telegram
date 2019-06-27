@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class VideoNote extends BaseTelegram {
+class VideoNote extends BaseTelegram
+{
 
     /**
      * @var string $file_id
@@ -33,5 +34,4 @@ class VideoNote extends BaseTelegram {
      * Optional. File size
      */
     protected $file_size;
-
 }

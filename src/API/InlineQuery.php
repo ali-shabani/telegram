@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class InlineQuery extends BaseTelegram {
+class InlineQuery extends BaseTelegram
+{
 
     /**
      * @var string $id
@@ -33,5 +34,4 @@ class InlineQuery extends BaseTelegram {
      * Offset of the results to be returned, can be controlled by the bot
      */
     protected $offset;
-
 }

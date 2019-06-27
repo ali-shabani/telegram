@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class ChatPhoto extends BaseTelegram {
+class ChatPhoto extends BaseTelegram
+{
 
     /**
      * @var string $small_file_id

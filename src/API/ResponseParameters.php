@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class ResponseParameters extends BaseTelegram {
+class ResponseParameters extends BaseTelegram
+{
     /**
      * @var integer|null $migrate_to_chat_id
      * Optional. The group has been migrated to a supergroup with the specified identifier.
@@ -16,5 +17,4 @@ class ResponseParameters extends BaseTelegram {
      * Optional. In case of exceeding flood control, the number of seconds left to wait before the request can be repeated
      */
     protected $retry_after;
-
 }

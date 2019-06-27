@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Update;
 
-
 class EditedMessage extends Message
 {
 
@@ -16,5 +15,4 @@ class EditedMessage extends Message
     {
         return $this->update->getEditedMessage();
     }
-
 }

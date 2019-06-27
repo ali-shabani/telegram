@@ -2,7 +2,8 @@
 
 namespace Alish\Telegram\API;
 
-class ChatMember extends BaseTelegram {
+class ChatMember extends BaseTelegram
+{
 
     /**
      * @var User $user
@@ -100,5 +101,4 @@ class ChatMember extends BaseTelegram {
      * Optional. Restricted only. True, if user may add web page previews to his messages, implies can_send_media_messages
      */
     protected $can_add_web_page_previews;
-
 }
