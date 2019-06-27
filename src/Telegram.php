@@ -16,6 +16,7 @@ use Illuminate\Support\Collection;
  */
 class Telegram
 {
+    use HasUpdate;
 
     /**
      * client for sending requests

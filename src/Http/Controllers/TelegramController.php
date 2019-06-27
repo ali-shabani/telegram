@@ -39,6 +39,8 @@ class TelegramController extends Controller
     {
         $this->bot = $bot;
         $update = $this->parseRequestToObject($request);
+        Telegram::update($update);
+
         $this->handle($update);
 
         return [
@@ -121,7 +123,7 @@ class TelegramController extends Controller
      */
     protected function handleType(Update $update)
     {
-        [$type, $handler] = $this->getTypeOfUpdate($update);
+        $type = Telegram::updateType();
 
         if (!$type) {
             return true;
@@ -129,6 +131,10 @@ class TelegramController extends Controller
 
         if ($this->isCommandActive($type) && ($result = $this->handleCommand($update))) {
             return $result;
+        }
+
+        if (!($handler = $this->getTypeHandler($type))) {
+            return true;
         }
 
         $concrete = new $handler($update);
@@ -141,30 +147,12 @@ class TelegramController extends Controller
     }
 
     /**
-     * @param  Update  $update
-     * @return array|null
+     * @param  string  $type
+     * @return string
      */
-    protected function getTypeOfUpdate(Update $update): ?array
+    protected function getTypeHandler(string $type) : string
     {
-        try {
-            $reflection = new ReflectionClass($update);
-
-            $properties = (new Collection($reflection->getProperties()))->map(function (\ReflectionProperty $property) {
-                return $property->getName();
-            })->toArray();
-
-            $properties = array_diff($properties, ['update_id']);
-
-            foreach ($properties as $property) {
-                if (isset($update->$property)) {
-                    return [$property, config("telegram.updates.$property", null)];
-                }
-            }
-        } catch (ReflectionException $exception) {
-            Telegram::dispatch(new FailedToParseUpdateFromTelegram($exception));
-        }
-
-        return null;
+        return config("telegram.updates.$type");
     }
 
     /**
