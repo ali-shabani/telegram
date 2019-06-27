@@ -140,9 +140,9 @@ class TelegramController extends Controller
 
     /**
      * @param  string  $type
-     * @return string
+     * @return string|null
      */
-    protected function getTypeHandler(string $type) : string
+    protected function getTypeHandler(string $type) : ?string
     {
         return config("telegram.updates.$type");
     }
