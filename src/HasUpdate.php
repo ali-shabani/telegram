@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram;
 
-
 use Alish\Telegram\API\Update;
 use Alish\Telegram\API\User;
 use Alish\Telegram\Events\FailedToParseUpdateFromTelegram;
