@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram;
 
-
 use Alish\Telegram\API\Update;
 use Alish\Telegram\API\User;
 use Alish\Telegram\Events\FailedToParseUpdateFromTelegram;
@@ -39,7 +38,7 @@ trait HasUpdate
      */
     public function updateType() : ?string
     {
-        if(!$this->update) {
+        if (!$this->update) {
             return null;
         }
 
