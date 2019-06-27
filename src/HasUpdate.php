@@ -39,6 +39,10 @@ trait HasUpdate
      */
     public function updateType() : ?string
     {
+        if(!$this->update) {
+            return null;
+        }
+
         try {
             $reflection = new ReflectionClass($this->update);
 
