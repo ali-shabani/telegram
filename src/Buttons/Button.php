@@ -16,15 +16,4 @@ class Button
         return $this->button;
     }
 
-    public static function __callStatic($name, $arguments)
-    {
-        $self = new self();
-
-        if (method_exists($self, $name)) {
-            return $self->$name(...$arguments);
-        }
-
-        throw new \BadMethodCallException($name);
-    }
-
 }
