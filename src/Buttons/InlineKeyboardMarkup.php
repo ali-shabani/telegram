@@ -7,7 +7,6 @@ use Illuminate\Support\Collection;
 
 class InlineKeyboardMarkup extends Button
 {
-
     protected $rows;
 
     /**
@@ -30,5 +29,4 @@ class InlineKeyboardMarkup extends Button
     {
         return $this->button['inline_keyboard'] = $this->rows;
     }
-
 }
