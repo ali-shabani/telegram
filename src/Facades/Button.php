@@ -12,7 +12,7 @@ abstract class Button
 
     public static function __callStatic($name, $arguments)
     {
-        $class = self::getClass();
+        $class = static::getClass();
         $self = new $class;
 
         if (method_exists($self, $name)) {
