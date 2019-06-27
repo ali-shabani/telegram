@@ -53,7 +53,7 @@ trait HasUpdate
             $properties = array_diff($properties, ['update_id']);
 
             foreach ($properties as $property) {
-                if (isset($update->$property)) {
+                if (isset($this->update->$property)) {
                     return $property;
                 }
             }
@@ -69,11 +69,12 @@ trait HasUpdate
      */
     public function updateObject()
     {
-        if ($method = 'get' . Str::studly($this->updateType())) {
-            return $this->update->$method();
+        if (!($type = $this->updateType())) {
+            return null;
         }
 
-        return null;
+        $method = 'get' . Str::studly($type);
+        return $this->update->$method();
     }
 
     /**
