@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 class Button
 {
     protected $button;
@@ -26,5 +25,4 @@ class Button
 
         throw new \BadMethodCallException($name);
     }
-
 }
