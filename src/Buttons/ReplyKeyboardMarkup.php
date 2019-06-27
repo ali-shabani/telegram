@@ -72,7 +72,8 @@ class ReplyKeyboardMarkup extends Button
      */
     public function build(): array
     {
-        return $this->button['keyboard'] = $this->rows;
+        $this->button['keyboard'] = $this->rows;
+        return $this->button;
     }
 
 }

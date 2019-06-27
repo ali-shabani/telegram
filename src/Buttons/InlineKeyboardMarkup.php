@@ -28,7 +28,8 @@ class InlineKeyboardMarkup extends Button
      */
     public function build(): array
     {
-        return $this->button['inline_keyboard'] = $this->rows;
+        $this->button['inline_keyboard'] = $this->rows;
+        return $this->button;
     }
 
 }
