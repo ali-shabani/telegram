@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 class ReplyKeyboardRemove extends Button
 {
 
@@ -34,5 +33,4 @@ class ReplyKeyboardRemove extends Button
         $this->button['selective'] = $selective;
         return $this;
     }
-
 }
