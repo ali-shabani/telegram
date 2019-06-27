@@ -92,7 +92,7 @@ class TelegramController extends Controller
     protected function respondToMiddleware(Update $update)
     {
         if ($middleware = $this->nextMiddleware()) {
-            return $this->handleMiddleware($update, $this->nextMiddleware());
+            return $this->handleMiddleware($update, $middleware);
         }
 
         return $this->handleType($update);
