@@ -19,15 +19,7 @@ class TelegramServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // use this if your package has views
-        $this->loadViewsFrom(realpath(__DIR__.'/resources/views'), 'telegram');
-
-        // use this if your package has lang files
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'telegram');
-
         $this->loadRoutesFrom(__DIR__.'/Http/routes.php');
-
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
 
         $this->publishes(
             [
