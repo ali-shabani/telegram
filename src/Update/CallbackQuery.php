@@ -87,7 +87,7 @@ class CallbackQuery extends Base
      * @param  array|null  $options
      * @return mixed
      */
-    protected function answer(string $text, ?array $options = [])
+    protected function answer(string $text, array $options = [])
     {
         $data = array_merge([
             'callback_query_id' => $this->id(),
