@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 class KeyboardButton extends Button
 {
 
@@ -42,5 +41,4 @@ class KeyboardButton extends Button
         $this->button['request_location'] = $requestLocation;
         return $this;
     }
-
 }
