@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 class Button
 {
     protected $button;
@@ -15,5 +14,4 @@ class Button
     {
         return $this->button;
     }
-
 }
