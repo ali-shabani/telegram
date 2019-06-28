@@ -21,6 +21,16 @@ class Message extends Base
     }
 
     /**
+     * For text messages, the actual UTF-8 text of the message, 0-4096 characters.
+     *
+     * @return string|null
+     */
+    protected function text() : ?string
+    {
+        return $this->message()->getText();
+    }
+
+    /**
      * Conversation the message belongs to
      *
      * @return Chat
@@ -54,4 +64,5 @@ class Message extends Base
 
         return $this->sendMessage($text, $options);
     }
+
 }
