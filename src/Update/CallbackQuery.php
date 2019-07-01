@@ -99,6 +99,5 @@ class CallbackQuery extends Base
         } catch (\Exception $error) {
             return $error->getMessage();
         }
-
     }
 }
