@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Facades;
 
-
 class ReplyKeyboardMarkup extends Button
 {
     protected static function getClass()
