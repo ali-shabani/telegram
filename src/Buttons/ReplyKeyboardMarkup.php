@@ -3,12 +3,10 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 use Illuminate\Support\Collection;
 
 class ReplyKeyboardMarkup extends Button
 {
-
     protected $rows;
 
     /**
@@ -75,5 +73,4 @@ class ReplyKeyboardMarkup extends Button
         $this->button['keyboard'] = $this->rows;
         return $this->button;
     }
-
 }

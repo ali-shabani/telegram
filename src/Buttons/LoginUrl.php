@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 class LoginUrl extends Button
 {
 
@@ -58,5 +57,4 @@ class LoginUrl extends Button
         $this->button['request_write_access'] = $requestWriteAccess;
         return $this;
     }
-
 }

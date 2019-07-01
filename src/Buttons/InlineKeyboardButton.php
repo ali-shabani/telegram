@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Buttons;
 
-
 class InlineKeyboardButton extends Button
 {
 
@@ -111,5 +110,4 @@ class InlineKeyboardButton extends Button
         $this->button['pay'] = $pay;
         return $this;
     }
-
 }

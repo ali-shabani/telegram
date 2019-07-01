@@ -64,5 +64,4 @@ class Message extends Base
 
         return $this->sendMessage($text, $options);
     }
-
 }
