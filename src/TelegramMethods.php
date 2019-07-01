@@ -85,6 +85,27 @@ trait TelegramMethods
     }
 
     /**
+     * @param $voice
+     * @param  string  $caption
+     * @param  array  $options
+     * @return mixed
+     */
+    public function sendVoice($voice, string $caption, array $options = [])
+    {
+        $data = array_merge(
+            [
+                'voice' => $voice,
+                'caption' => $caption,
+                'parse_mode' => $this->parseMode()
+            ],
+            $options
+        );
+
+        return Telegram::chatId($this->chatId())
+            ->sendVoice($data);
+    }
+
+    /**
      * parseMode of text
      *
      * @return string
