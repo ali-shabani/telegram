@@ -94,11 +94,6 @@ class CallbackQuery extends Base
             'text' => $text
         ], $options);
 
-        try {
-            return Telegram::answerCallbackQuery($data);
-        } catch (\Exception $error) {
-            return $error->getMessage();
-        }
-
+        return Telegram::answerCallbackQuery($data);
     }
 }
