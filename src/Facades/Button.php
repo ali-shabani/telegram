@@ -3,7 +3,6 @@
 
 namespace Alish\Telegram\Facades;
 
-
 abstract class Button
 {
     protected $class;
@@ -21,5 +20,4 @@ abstract class Button
 
         throw new \BadMethodCallException($name);
     }
-
 }
