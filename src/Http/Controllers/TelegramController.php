@@ -183,7 +183,7 @@ class TelegramController extends Controller
     {
         if ($entities = $message->getEntities()) {
             if ($this->isEntityBotCommand($entities[0])) {
-                $command = substr($message->getText(), 1, $entities[0]->getLength());
+                $command = substr($message->getText(), 1, $entities[0]->getLength() - 1);
                 return config("telegram.commands.list.$command");
             }
         }
