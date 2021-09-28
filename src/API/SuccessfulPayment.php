@@ -8,7 +8,7 @@
 
 namespace Alish\Telegram\API;
 
-class SuccessfulPayment extends BaseTelegram
+class SuccessfulPayment extends TelegramAPI
 {
 
     /**

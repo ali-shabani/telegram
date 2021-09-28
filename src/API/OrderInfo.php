@@ -8,7 +8,7 @@
 
 namespace Alish\Telegram\API;
 
-class OrderInfo extends BaseTelegram
+class OrderInfo extends TelegramAPI
 {
 
     /**

@@ -2,48 +2,60 @@
 
 namespace Alish\Telegram\API;
 
-class Video extends BaseTelegram
+class Video extends TelegramAPI
 {
 
     /**
      * @var string $file_id
      * Unique identifier for this file
      */
-    protected $file_id;
+    protected string $file_id;
+
+    /**
+     * @var string $file_unique_id
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     */
+    public string $file_unique_id;
 
     /**
      * @var integer $width
      * Video width as defined by sender
      */
-    protected $width;
+    protected int $width;
 
     /**
      * @var integer $height
      * Video height as defined by sender
      */
-    protected $height;
+    protected int $height;
 
     /**
      * @var integer $duration
      * Duration of the video in seconds as defined by sender
      */
-    protected $duration;
+    protected int $duration;
 
     /**
      * @var PhotoSize|null $thumb
      * Optional. Video thumbnail
      */
-    protected $thumb;
+    protected ?PhotoSize $thumb;
+
+    /**
+     * @var string|null $file_name
+     * Optional. Original filename as defined by sender
+     */
+    public ?string $file_name;
 
     /**
      * @var string|null $mime_type
      * Optional. Mime type of a file as defined by sender
      */
-    protected $mime_type;
+    protected ?string $mime_type;
 
     /**
      * @var integer|null $file_size
      * Optional. File size
      */
-    protected $file_size;
+    protected ?int $file_size;
 }

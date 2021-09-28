@@ -8,7 +8,7 @@
 
 namespace Alish\Telegram\API;
 
-class PreCheckoutQuery extends BaseTelegram
+class PreCheckoutQuery extends TelegramAPI
 {
 
     /**

@@ -8,7 +8,7 @@
 
 namespace Alish\Telegram\API;
 
-class EncryptedPassportElement extends BaseTelegram
+class EncryptedPassportElement extends TelegramAPI
 {
     /**
      * @var string

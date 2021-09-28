@@ -3,7 +3,7 @@
 
 namespace Alish\Telegram\API;
 
-class LoginUrl extends BaseTelegram
+class LoginUrl extends TelegramAPI
 {
     /**
      * @var string $url
@@ -13,13 +13,13 @@ class LoginUrl extends BaseTelegram
      *
      * NOTE: You must always check the hash of the received data to verify the authentication and the integrity of the data as described in Checking authorization.
      */
-    protected $url;
+    protected string $url;
 
     /**
      * @var string|null $forward_text
      * Optional. New text of the button in forwarded messages.
      */
-    protected $forward_text;
+    protected ?string $forward_text;
 
     /**
      * @var string|null $bot_username
@@ -27,11 +27,11 @@ class LoginUrl extends BaseTelegram
      * If not specified, the current bot's username will be assumed.
      * The url's domain must be the same as the domain linked with the bot. See Linking your domain to the bot for more details.
      */
-    protected $bot_username;
+    protected ?string $bot_username;
 
     /**
      * @var boolean|null $request_write_access
      * Optional. Pass True to request the permission for your bot to send messages to the user.
      */
-    protected $request_write_access;
+    protected ?bool $request_write_access;
 }

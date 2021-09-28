@@ -2,7 +2,7 @@
 
 namespace Alish\Telegram\API;
 
-class ChosenInlineResult extends BaseTelegram
+class ChosenInlineResult extends TelegramAPI
 {
 
     /**

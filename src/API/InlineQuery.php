@@ -2,7 +2,7 @@
 
 namespace Alish\Telegram\API;
 
-class InlineQuery extends BaseTelegram
+class InlineQuery extends TelegramAPI
 {
 
     /**

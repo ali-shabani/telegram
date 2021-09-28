@@ -2,7 +2,7 @@
 
 namespace Alish\Telegram\API;
 
-class Invoice extends BaseTelegram
+class Invoice extends TelegramAPI
 {
 
     /**

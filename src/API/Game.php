@@ -2,7 +2,7 @@
 
 namespace Alish\Telegram\API;
 
-class Game extends BaseTelegram
+class Game extends TelegramAPI
 {
 
     /**

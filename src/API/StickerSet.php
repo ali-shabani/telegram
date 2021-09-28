@@ -8,7 +8,7 @@
 
 namespace Alish\Telegram\API;
 
-class StickerSet extends BaseTelegram
+class StickerSet extends TelegramAPI
 {
 
     /**

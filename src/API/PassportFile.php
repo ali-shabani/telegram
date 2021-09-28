@@ -2,7 +2,7 @@
 
 namespace Alish\Telegram\API;
 
-class PassportFile extends BaseTelegram
+class PassportFile extends TelegramAPI
 {
 
     /**

@@ -2,21 +2,21 @@
 
 namespace Alish\Telegram\API;
 
-class ReplyKeyboardMarkup extends BaseTelegram
+class ReplyKeyboardMarkup extends TelegramAPI
 {
 
     /**
      * @var KeyboardButton[][] $keyboard
      * Array of button rows, each represented by an Array of KeyboardButton objects
      */
-    protected $keyboard;
+    public array $keyboard;
 
     /**
      * @var boolean|null $resize_keyboard
      * Optional. Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons).
      * Defaults to false, in which case the custom keyboard is always of the same height as the app's standard keyboard.
      */
-    protected $resize_keyboard;
+    public ?bool $resize_keyboard;
 
     /**
      * @var boolean|null $one_time_keyboard
@@ -24,7 +24,13 @@ class ReplyKeyboardMarkup extends BaseTelegram
      * The keyboard will still be available, but clients will automatically display the usual letter-keyboard in the chat – the user can press a special button in the input field to see the custom keyboard again.
      * Defaults to false.
      */
-    protected $one_time_keyboard;
+    public ?bool $one_time_keyboard;
+
+    /**
+     * @var string|null $input_field_placeholder
+     * Optional. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters
+     */
+    public ?string $input_field_placeholder;
 
     /**
      * @var boolean|null $selective
@@ -34,5 +40,5 @@ class ReplyKeyboardMarkup extends BaseTelegram
      * Example: A user requests to change the bot‘s language, bot replies to the request with a keyboard to select the new language.
      * Other users in the group don’t see the keyboard.
      */
-    protected $selective;
+    public ?bool $selective;
 }

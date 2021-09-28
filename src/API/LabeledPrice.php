@@ -2,7 +2,7 @@
 
 namespace Alish\Telegram\API;
 
-class LabeledPrice extends BaseTelegram
+class LabeledPrice extends TelegramAPI
 {
 
     /**

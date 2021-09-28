@@ -2,36 +2,42 @@
 
 namespace Alish\Telegram\API;
 
-class Document extends BaseTelegram
+class Document extends TelegramAPI
 {
 
     /**
      * @var string $file_id
      * Unique file identifier
      */
-    protected $file_id;
+    public string $file_id;
+
+    /**
+     * @var string $file_unique_id
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     */
+    public string $file_unique_id;
 
     /**
      * @var PhotoSize|null $thumb
      * Optional. Document thumbnail as defined by sender
      */
-    protected $thumb;
+    public ?PhotoSize $thumb;
 
     /**
      * @var string|null $file_name
      * Optional. Original filename as defined by sender
      */
-    protected $file_name;
+    public ?string $file_name;
 
     /**
      * @var string|null $mime_type
      * Optional. MIME type of the file as defined by sender
      */
-    protected $mime_type;
+    public ?string $mime_type;
 
     /**
      * @var integer|null $file_size
      * Optional. File size
      */
-    protected $file_size;
+    public ?int $file_size;
 }

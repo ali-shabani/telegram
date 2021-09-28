@@ -3,18 +3,18 @@
 
 namespace Alish\Telegram\API;
 
-class PollOption extends BaseTelegram
+class PollOption extends TelegramAPI
 {
 
     /**
      * @var string $text
      * Option text, 1-100 characters
      */
-    protected $text;
+    protected string $text;
 
     /**
      * @var integer $voter_count
      * Number of users that voted for this option
      */
-    protected $voter_count;
+    protected int $voter_count;
 }

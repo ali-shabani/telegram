@@ -2,7 +2,7 @@
 
 namespace Alish\Telegram\API;
 
-class ShippingAddress extends BaseTelegram
+class ShippingAddress extends TelegramAPI
 {
 
     /**
